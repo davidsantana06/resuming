@@ -19,7 +19,16 @@ async function bootstrap() {
     .setTitle('Resume Station')
     .setDescription('Platform dedicated to managing and sharing resumes')
     .addTag('app')
+    .addTag('auth')
     .addTag('user')
+    .addBearerAuth(
+      {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+      },
+      'accessToken',
+    )
     .build();
   const documentFactory = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('swagger/ui', app, documentFactory, {
