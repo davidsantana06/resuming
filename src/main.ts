@@ -20,6 +20,7 @@ async function bootstrap() {
     .setDescription('Platform dedicated to managing and sharing resumes')
     .addTag('app')
     .addTag('auth')
+    .addTag('profile')
     .addTag('user')
     .addBearerAuth(
       {

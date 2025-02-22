@@ -1,0 +1,48 @@
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { IsOptional, IsString, MaxLength, MinLength } from 'class-validator';
+
+export class EducationDto {
+  @ApiProperty({
+    title: 'Course',
+    example: 'Advanced TypeScript and Design Patterns',
+    minLength: 3,
+    maxLength: 50,
+    description: 'Must have between 3 and 50 characters',
+  })
+  @IsString()
+  @MinLength(3)
+  @MaxLength(50)
+  course: string;
+
+  @ApiPropertyOptional({
+    title: 'Institution',
+    example: 'NestJS Academy',
+    minLength: 3,
+    maxLength: 100,
+    description: 'Must have between 3 and 100 characters',
+  })
+  @IsOptional()
+  @IsString()
+  @MinLength(3)
+  @MaxLength(100)
+  institution?: string;
+
+  @ApiProperty({
+    title: 'From Date',
+    example: 'Sep. 2022',
+    maxLength: 20,
+    description: 'Can be any format with up to 20 characters',
+  })
+  @IsString()
+  @MaxLength(20)
+  fromDate: string;
+
+  @ApiProperty({
+    title: 'To Date',
+    example: 'Dec. 2022',
+    maxLength: 20,
+    description: 'Can be any format with up to 20 characters',
+  })
+  @MaxLength(20)
+  toDate: string;
+}

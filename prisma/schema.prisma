@@ -7,12 +7,77 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Education {
+  id          Int      @id @default(autoincrement())
+  profileId   String
+  course      String
+  institution String?
+  fromDate    String
+  toDate      String
+  createdAt   DateTime @default(now())
+
+  profile Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+
+  @@index([profileId])
+}
+
+model Experience {
+  id               Int      @id @default(autoincrement())
+  profileId        String
+  position         String
+  company          String?
+  responsibilities String?
+  fromDate         String
+  toDate           String
+  createdAt        DateTime @default(now())
+
+  profile Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+
+  @@index([profileId])
+}
+
+model Platform {
+  id        Int      @id @default(autoincrement())
+  profileId String
+  name      String
+  icon      String
+  url       String
+  createdAt DateTime @default(now())
+
+  profile Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+
+  @@index([profileId])
+}
+
+model Profile {
+  id        String   @id @default(uuid())
+  userId    String   @unique
+  handle    String   @unique
+  name      String
+  title     String
+  summary   String
+  email     String   @unique
+  phone     String?
+  picture   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user        User         @relation(fields: [userId], references: [id])
+  educations  Education[]
+  experiences Experience[]
+  platforms   Platform[]
+
+  @@index([handle])
+}
+
 model User {
   id        String   @id @default(uuid())
   email     String   @unique
   password  String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  profile Profile?
 
   @@index([email])
 }
