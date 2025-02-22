@@ -17,7 +17,9 @@ async function bootstrap() {
 
   const config = new DocumentBuilder()
     .setTitle('Resume Station')
-    .setDescription('Platform dedicated to managing and sharing resumes.')
+    .setDescription('Platform dedicated to managing and sharing resumes')
+    .addTag('app')
+    .addTag('user')
     .build();
   const documentFactory = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('swagger/ui', app, documentFactory, {
