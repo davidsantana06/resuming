@@ -5,11 +5,15 @@ import {
   Get,
   Post,
   Put,
+  UploadedFile,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 import {
   ApiBearerAuth,
   ApiBody,
+  ApiConsumes,
   ApiOperation,
   ApiResponse,
   ApiTags,
@@ -70,6 +74,44 @@ export class ProfileController {
   @Put(':id')
   async update(@CurrentUser() user: CurrentUserDto, @Body() dto: ProfileDto) {
     return await this.profileService.update(user.id, dto);
+  }
+
+  @ApiOperation({
+    summary: 'Upload a profile picture',
+    description:
+      'Uploads a picture to your profile, available only when signed in',
+  })
+  @ApiBearerAuth('accessToken')
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        file: {
+          type: 'string',
+          format: 'binary',
+        },
+      },
+      description: 'The picture file to upload',
+      required: ['file'],
+    },
+  })
+  @ApiConsumes('multipart/form-data')
+  @ApiResponse({
+    status: 200,
+    description: 'Success',
+    type: ProfileEntity,
+  })
+  @ApiResponse({ status: 400, description: 'Image invalid' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  @ApiResponse({ status: 404, description: 'Profile not found' })
+  @UseGuards(JwtAuthGuard)
+  @UseInterceptors(FileInterceptor('file'))
+  @Post(':id/picture')
+  async uploadPicture(
+    @CurrentUser() user: CurrentUserDto,
+    @UploadedFile() file: Express.Multer.File,
+  ) {
+    return await this.profileService.updatePicture(user.id, file);
   }
 
   @ApiOperation({

@@ -44,6 +44,10 @@ export class ProfileRepository {
     });
   }
 
+  updatePicture(id: string, data: { picture: string }): Promise<Profile> {
+    return this.prisma.profile.update({ where: { id }, data });
+  }
+
   delete(id: string): Promise<CompleteProfile> {
     return this.prisma.profile.delete({
       where: { id },
