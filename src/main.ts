@@ -7,13 +7,9 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
-  app.useGlobalPipes(
-    new ValidationPipe({
-      whitelist: true,
-      forbidNonWhitelisted: true,
-      transform: true,
-    }),
-  );
+  app.setViewEngine('hbs');
+  app.setBaseViewsDir('view');
+  app.useStaticAssets('static', { prefix: '/static' });
 
   const config = new DocumentBuilder()
     .setTitle('Resume Station')
@@ -35,6 +31,14 @@ async function bootstrap() {
   SwaggerModule.setup('swagger/ui', app, documentFactory, {
     jsonDocumentUrl: 'swagger/json',
   });
+
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      forbidNonWhitelisted: true,
+      transform: true,
+    }),
+  );
 
   await app.listen(process.env.PORT ?? 3000);
 }

@@ -1,0 +1,76 @@
+:root {
+  --bulma-primary-h: 195deg;
+  --bulma-primary-s: 70%;
+  --bulma-primary-l: 67%;
+  --bulma-link-h: 202deg;
+  --bulma-link-s: 61%;
+  --bulma-link-l: 54%;
+}
+
+html,
+body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+.image.is-12x12 {
+  width: 12px;
+  height: 12px;
+}
+
+.image.is-max-width-128 {
+  width: 100%;
+  max-width: 128px;
+}
+
+.image.is-max-width-256 {
+  width: 100%;
+  max-width: 256px;
+}
+
+.is-border-0 {
+  border: 0 !important;
+}
+
+.is-disabled {
+  pointer-events: none;
+  opacity: 0.65;
+}
+
+.is-bottom-0 {
+  bottom: 0;
+}
+
+.is-right-0 {
+  right: 0;
+}
+
+.is-shadow {
+  box-shadow:
+    0 4px 6px rgba(0, 0, 0, 0.1),
+    0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.is-z-index-1 {
+  z-index: 1;
+}
+
+.animate__delay-250ms {
+  animation-delay: 250ms;
+}
+
+.animate__delay-500ms {
+  animation-delay: 500ms;
+}
+
+.animate__delay-750ms {
+  animation-delay: 750ms;
+}
+
+.animate__delay-1250ms {
+  animation-delay: 1250ms;
+}
+
+.animate__delay-1500ms {
+  animation-delay: 1500ms;
+}

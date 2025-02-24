@@ -1,0 +1,218 @@
+<html lang='en' data-theme='dark'>
+  <head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <title>{{name}}</title>
+    <link rel='icon' href='/static/favicon.ico' />
+    <script
+      src='https://kit.fontawesome.com/f3579f44cb.js'
+      crossorigin='anonymous'
+    ></script>
+    <link rel='stylesheet' href='/static/vendor/bulma.min.css' />
+    <link rel='stylesheet' href='/static/vendor/bulma-tooltip.min.css' />
+    <link rel='stylesheet' href='/static/vendor/animate.min.css' />
+    <link rel='stylesheet' href='/static/css/style.css' />
+  </head>
+
+  <body>
+    <main class='container px-5 my-6'>
+      <div class='columns is-6'>
+        <div class='column is-full is-3'>
+          <section
+            class='is-flex is-flex-direction-column is-align-items-center'
+          >
+            {{! ~ picture ~ !}}
+            <figure
+              class='image is-max-width-256 animate__animated animate__fadeInLeft animate__delay-1s'
+            >
+              <img
+                class='is-rounded'
+                src='/static/img/{{picture}}'
+                alt='{{name}}'
+              />
+            </figure>
+            {{! ~ !}}
+
+            {{! ~ platforms ~ !}}
+            {{#if platforms}}
+              <div
+                class='is-flex is-column-gap-2 mt-5 animate__animated animate__fadeInLeft animate__delay-1250ms'
+              >
+                {{#each platforms}}
+                  <a
+                    class='icon is-medium is-border-0 has-text-link has-tooltip-arrow has-tooltip-bottom'
+                    data-tooltip='{{this.name}}'
+                    href='{{this.url}}'
+                    target='_blank'
+                  >
+                    <i class='{{this.icon}} fa-lg'></i>
+                  </a>
+                {{/each}}
+              </div>
+            {{/if}}
+            {{! ~ !}}
+          </section>
+        </div>
+        <div class='column is-full is-9'>
+          <section
+            class='animate__animated animate__fadeInRight animate__delay-250ms'
+          >
+            {{! ~ name + title ~ !}}
+            <div class='mb-3'>
+              <h1 class='title is-5 mb-1'>{{name}}</h1>
+              <h2 class='subtitle is-6'>{{title}}</h2>
+            </div>
+            {{! ~ !}}
+
+            {{! ~ summary ~ !}}
+            <p class='has-text-justified mb-3'>
+              {{summary}}
+            </p>
+            {{! ~ !}}
+
+            <div class='is-flex is-flex-direction-column is-row-gap-1'>
+              {{! ~ email ~ !}}
+              <div class='icon-text'>
+                <span class='icon'>
+                  <i class='fas fa-envelope'></i>
+                </span>
+                <span>{{email}}</span>
+              </div>
+              {{! ~ !}}
+
+              {{! ~ phone ~ !}}
+              {{#if phone}}
+                <div class='icon-text'>
+                  <span class='icon'>
+                    <i class='fas fa-phone'></i>
+                  </span>
+                  <span>{{phone}}</span>
+                </div>
+              {{/if}}
+              {{! ~ !}}
+            </div>
+          </section>
+
+          {{! ~ educations ~ !}}
+          {{#if educations}}
+            <section
+              class='mt-6 animate__animated animate__fadeInRight animate__delay-500ms'
+            >
+              <div class='mb-5'>
+                <h2 class='title is-5 has-text-weight-bold mb-1'>Education</h2>
+                <h3 class='subtitle is-italic is-6' lang='pt-br'>Formação</h3>
+              </div>
+              <div class='is-flex is-flex-direction-column is-row-gap-4 ml-5'>
+                {{#each educations}}
+                  <div>
+                    {{! ~ e.course + e.institution ~ !}}
+                    <div>
+                      <h3 class='title is-6 has-text-weight-semibold mb-0'>
+                        {{this.course}}
+                      </h3>
+                      {{#if this.institution}}
+                        <h4 class='subtitle is-6 is-italic mt-1'>
+                          {{this.institution}}
+                        </h4>
+                      {{/if}}
+                    </div>
+                    {{! ~ !}}
+
+                    {{! ~ e.fromDate + e.toDate ~ !}}
+                    <div class='is-size-7 mt-2'>
+                      {{this.fromDate}}
+                      —
+                      {{this.toDate}}
+                    </div>
+                    {{! ~ !}}
+                  </div>
+                {{/each}}
+              </div>
+            </section>
+          {{/if}}
+
+          {{! ~ experiences ~ !}}
+          {{#if experiences}}
+            <section
+              class='mt-6 animate__animated animate__fadeInRight animate__delay-750ms'
+            >
+              <div class='mb-5'>
+                <h2 class='title is-5 has-text-weight-bold mb-1'>
+                  Experiences
+                </h2>
+                <h3 class='subtitle is-italic is-6' lang='pt-br'>
+                  Experiências
+                </h3>
+              </div>
+              <div class='is-flex is-flex-direction-column is-row-gap-4 ml-5'>
+                {{#each experiences}}
+                  <div>
+                    {{! ~ e.position + e.company ~ !}}
+                    <div>
+                      <h3 class='title is-6 has-text-weight-semibold mb-0'>
+                        {{this.position}}
+                      </h3>
+                      {{#if this.company}}
+                        <h4 class='subtitle is-6 is-italic mt-1'>
+                          {{this.company}}
+                        </h4>
+                      {{/if}}
+                    </div>
+                    {{! ~ !}}
+
+                    {{! ~ e.responsibilities ~ !}}
+                    {{#if this.responsibilities}}
+                      <p class='has-text-justified mt-2'>
+                        {{this.responsibilities}}
+                      </p>
+                    {{/if}}
+                    {{! ~ !}}
+
+                    {{! ~ e.fromDate + e.toDate ~ !}}
+                    <div class='is-size-7 mt-2'>
+                      {{this.fromDate}}
+                      —
+                      {{this.toDate}}
+                    </div>
+                    {{! ~ !}}
+                  </div>
+                {{/each}}
+              </div>
+            </section>
+          {{/if}}
+          {{! ~ !}}
+        </div>
+      </div>
+
+      {{! ~ actions ~ !}}
+      <div class='is-position-fixed is-right-0 is-bottom-0 mr-5 mb-5'>
+        <div
+          class='dropdown is-up is-right is-hoverable animate__animated animate__fadeInUp animate__delay-1500ms'
+        >
+          <div class='dropdown-trigger'>
+            <button class='button is-shadow'>
+              <span class='icon is-small'>
+                <i class='fas fa-angle-up'></i>
+              </span>
+            </button>
+          </div>
+          <div class='dropdown-menu'>
+            <div class='dropdown-content'>
+              {{! ~ toggleTheme ~ !}}
+              <a class='dropdown-item is-unselectable' onclick='toggleTheme()'>
+                <i class='fas fa-palette mr-2'></i>
+                <span>Toggle theme</span>
+                &bull;
+                <span class='is-italic is-size-7' lang='pt-br'>Alternar tema</span>
+              </a>
+              {{! ~ !}}
+            </div>
+          </div>
+        </div>
+      </div>
+      {{! ~ !}}
+    </main>
+
+    <script src='/static/js/script.js'></script>
+  </body>
+</html>
