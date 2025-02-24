@@ -1,0 +1,63 @@
+<img 
+  src="./static/img/_banner.png"
+  alt="Resume Station"
+  style="width: 100%;"
+/>
+
+**Resume Station** is a web platform designed for managing andsharing résumés. With it, users can create accounts and manage up to three profiles, which can be shared via a personalized URL, including their basic information, education, and work experience.
+
+![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
+![NestJS](https://img.shields.io/badge/nestjs-%23E0234E.svg?style=for-the-badge&logo=nestjs&logoColor=white)
+![Handlebars](https://img.shields.io/badge/Handlebars-%23000000?style=for-the-badge&logo=Handlebars.js&logoColor=white)
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+![Bulma](https://img.shields.io/badge/bulma-00D0B1?style=for-the-badge&logo=bulma&logoColor=white)
+![Swagger](https://img.shields.io/badge/-Swagger-%23Clojure?style=for-the-badge&logo=swagger&logoColor=white)
+![Prisma](https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white)
+![SQLite](https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white)
+
+### 🛠️ Installation and Setup
+
+The system was developed using **Node.js 20**, and it is recommended to use this version to ensure compatibility. To set up the application, follow these instructions from the project root directory.
+
+#### 1️⃣ Configure Environment Variables
+
+Set up the environment variables based on the `.env.example` file. If you have a local copy of the code, simply copy the file and rename it to `.env`. The values to be defined are:
+
+- `DATABASE_URL` — Database connection string.
+- `JWT_SECRET` — Secret key for signing JWTs.
+- `PORT` — Server port.
+
+#### 2️⃣ Install Dependencies
+
+```bash
+npm install
+```
+
+#### 3️⃣ Run Migrations
+
+```bash
+npx prisma migrate dev
+```
+
+_or_
+
+```bash
+npx prisma migrate deploy
+```
+
+#### 4️⃣ Start the Server
+
+```bash
+npm run start:dev
+```
+
+_or_
+
+```bash
+npm run start
+```
+
+### 📖 API Documentation
+
+To explore the technical details of the API, access **Swagger UI** at `/swagger/ui`. There, you will find a complete list of available endpoints, along with their input and output parameters.
