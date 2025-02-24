@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
+import { PictureService } from 'src/picture/picture.service';
 import {
   HandleAlreadyInUseException,
   ProfileLimitExceededException,
   ProfileNotFoundException,
 } from './profile.exception';
-import { PictureService } from 'src/picture/picture.service';
 import { ProfileRepository } from './profile.repository';
 import { ProfileDto } from './dto/profile.dto';
 import { CompleteProfile } from './type/complete-profile.type';
@@ -32,7 +32,7 @@ export class ProfileService {
   }
 
   async getUnique(
-    where: { id: string } | { userId: string },
+    where: { id: string } | { userId: string } | { handle: string },
   ): Promise<CompleteProfile> {
     const profile = await this.profileRepository.findUnique(where);
 
@@ -54,19 +54,19 @@ export class ProfileService {
     return this.profileRepository.update(id, dto);
   }
 
-  async updatePicture(userId: string, file: Express.Multer.File) {
-    const { id, picture } = await this.getUnique({ userId });
-
-    if (picture) this.pictureService.delete(picture);
-
-    const fileName = this.pictureService.save(file);
-
-    return this.profileRepository.updatePicture(id, { picture: fileName });
-  }
-
   async delete(userId: string) {
     const { id, picture } = await this.getUnique({ userId });
     if (picture) this.pictureService.delete(picture);
     return this.profileRepository.delete(id);
+  }
+
+  async uploadPicture(userId: string, file: Express.Multer.File) {
+    const { id, picture } = await this.getUnique({ userId });
+
+    if (picture) this.pictureService.delete(picture);
+
+    const { filename } = this.pictureService.save(file);
+
+    return this.profileRepository.updatePicture(id, { picture: filename });
   }
 }

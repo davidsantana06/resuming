@@ -26,6 +26,9 @@ import { ProfileDto } from './dto/profile.dto';
 import { ProfileEntity } from './entity/profile.entity';
 
 @ApiTags('profile')
+@ApiBearerAuth('accessToken')
+@ApiResponse({ status: 401, description: 'Unauthorized' })
+@UseGuards(JwtAuthGuard)
 @Controller('api/profile')
 export class ProfileController {
   constructor(private readonly profileService: ProfileService) {}
@@ -34,13 +37,10 @@ export class ProfileController {
     summary: 'Create a profile',
     description: 'Creates a profile, available only when signed in',
   })
-  @ApiBearerAuth('accessToken')
   @ApiBody({ type: ProfileDto })
   @ApiResponse({ status: 201, description: 'Success', type: ProfileEntity })
-  @ApiResponse({ status: 401, description: 'Unauthorized' })
   @ApiResponse({ status: 409, description: 'Handle is already in use' })
   @ApiResponse({ status: 429, description: 'Profile limit exceeded' })
-  @UseGuards(JwtAuthGuard)
   @Post()
   async create(@CurrentUser() user: CurrentUserDto, @Body() dto: ProfileDto) {
     return await this.profileService.create(user.id, dto);
@@ -50,11 +50,9 @@ export class ProfileController {
     summary: 'Get profile',
     description: 'Returns your profile, available only when signed in',
   })
-  @ApiBearerAuth('accessToken')
   @ApiResponse({ status: 200, description: 'Success', type: [ProfileEntity] })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   @ApiResponse({ status: 404, description: 'Profile not found' })
-  @UseGuards(JwtAuthGuard)
   @Get()
   async findManyByUserId(@CurrentUser() user: CurrentUserDto) {
     return await this.profileService.getUnique({ userId: user.id });
@@ -64,16 +62,24 @@ export class ProfileController {
     summary: 'Update profile',
     description: 'Updates your profile, available only when signed in',
   })
-  @ApiBearerAuth('accessToken')
   @ApiBody({ type: ProfileDto })
   @ApiResponse({ status: 200, description: 'Success', type: ProfileEntity })
-  @ApiResponse({ status: 401, description: 'Unauthorized' })
   @ApiResponse({ status: 404, description: 'Profile not found' })
   @ApiResponse({ status: 409, description: 'Handle is already in use' })
-  @UseGuards(JwtAuthGuard)
-  @Put(':id')
+  @Put()
   async update(@CurrentUser() user: CurrentUserDto, @Body() dto: ProfileDto) {
     return await this.profileService.update(user.id, dto);
+  }
+
+  @ApiOperation({
+    summary: 'Delete profile',
+    description: 'Deletes your profile, available only when signed in',
+  })
+  @ApiResponse({ status: 200, description: 'Success', type: ProfileEntity })
+  @ApiResponse({ status: 404, description: 'Profile not found' })
+  @Delete()
+  async delete(@CurrentUser() user: CurrentUserDto) {
+    return await this.profileService.delete(user.id);
   }
 
   @ApiOperation({
@@ -81,7 +87,6 @@ export class ProfileController {
     description:
       'Uploads a picture to your profile, available only when signed in',
   })
-  @ApiBearerAuth('accessToken')
   @ApiBody({
     schema: {
       type: 'object',
@@ -102,29 +107,13 @@ export class ProfileController {
     type: ProfileEntity,
   })
   @ApiResponse({ status: 400, description: 'Image invalid' })
-  @ApiResponse({ status: 401, description: 'Unauthorized' })
   @ApiResponse({ status: 404, description: 'Profile not found' })
-  @UseGuards(JwtAuthGuard)
   @UseInterceptors(FileInterceptor('file'))
-  @Post(':id/picture')
+  @Post('upload-picture')
   async uploadPicture(
     @CurrentUser() user: CurrentUserDto,
     @UploadedFile() file: Express.Multer.File,
   ) {
-    return await this.profileService.updatePicture(user.id, file);
-  }
-
-  @ApiOperation({
-    summary: 'Delete profile',
-    description: 'Deletes your profile, available only when signed in',
-  })
-  @ApiBearerAuth('accessToken')
-  @ApiResponse({ status: 200, description: 'Success', type: ProfileEntity })
-  @ApiResponse({ status: 401, description: 'Unauthorized' })
-  @ApiResponse({ status: 404, description: 'Profile not found' })
-  @UseGuards(JwtAuthGuard)
-  @Delete(':id')
-  async delete(@CurrentUser() user: CurrentUserDto) {
-    return await this.profileService.delete(user.id);
+    return await this.profileService.uploadPicture(user.id, file);
   }
 }

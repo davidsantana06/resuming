@@ -58,7 +58,7 @@ model Profile {
   summary   String
   email     String   @unique
   phone     String?
-  picture   String?
+  picture   String   @default("_picture.png")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 

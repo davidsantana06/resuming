@@ -62,7 +62,7 @@ export class ProfileEntity implements Profile {
 
   @ApiProperty({
     title: 'Picture',
-    example: '1cefffcf-ddd7-4e8a-8406-dd10d89f8060.png',
+    examples: ['_picture.png', '1cefffcf-ddd7-4e8a-8406-dd10d89f8060.png'],
     readOnly: true,
     nullable: true,
   })
