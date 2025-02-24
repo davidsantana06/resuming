@@ -76,11 +76,11 @@ export class ProfileDto {
   @ApiProperty({
     title: 'E-mail',
     example: 'name@domain.com',
-    maxLength: 254,
-    description: 'Must be a valid e-mail address with up to 254 characters',
+    maxLength: 50,
+    description: 'Must be a valid e-mail address with up to 50 characters',
   })
   @IsEmail()
-  @MaxLength(254)
+  @MaxLength(50)
   email: string;
 
   @ApiPropertyOptional({
