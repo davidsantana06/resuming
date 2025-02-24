@@ -16,7 +16,7 @@ export class AuthController {
       'authentication',
   })
   @ApiBody({ type: SignInDto })
-  @ApiResponse({ status: 200, description: 'Success', type: AuthPayloadDto })
+  @ApiResponse({ status: 201, description: 'Success', type: AuthPayloadDto })
   @ApiResponse({ status: 401, description: 'Invalid credentials' })
   @Post('sign-in')
   async signIn(@Body() dto: SignInDto) {

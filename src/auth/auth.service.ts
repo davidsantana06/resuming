@@ -22,8 +22,11 @@ export class AuthService {
       !user || !(await bcrypt.compare(password, user.password));
     if (isCredentialsInvalid) throw new CredentialsInvalidException();
 
-    const payload = { sub: user.id };
+    const accessToken = this.jwtService.sign({ sub: user.id });
 
-    return { accessToken: this.jwtService.sign(payload) };
+    const expiresAt = new Date();
+    expiresAt.setDate(expiresAt.getDate() + 7);
+
+    return { accessToken, expiresAt };
   }
 }
