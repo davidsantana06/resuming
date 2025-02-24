@@ -56,9 +56,9 @@ pids
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
 # Prisma
-/prisma/*.db
-/prisma/*.db-journal
+prisma/*.db
+prisma/*.db-journal
 
 # Static
-/static/img/*
-!/static/img/_*
+static/img/*
+!static/img/_*
