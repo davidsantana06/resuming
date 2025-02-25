@@ -59,6 +59,9 @@ report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 prisma/*.db
 prisma/*.db-journal
 
+# Puppeteer
+.cache/puppeteer
+
 # Static
 static/img/*
 !static/img/_*
