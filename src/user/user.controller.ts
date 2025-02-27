@@ -43,7 +43,7 @@ export class UserController {
   @UseGuards(JwtAuthGuard)
   @Put()
   async update(@CurrentUser() user: CurrentUserDto, @Body() dto: UserDto) {
-    return this.userService.update(user.id, dto);
+    return await this.userService.update(user.id, dto);
   }
 
   @ApiOperation({
