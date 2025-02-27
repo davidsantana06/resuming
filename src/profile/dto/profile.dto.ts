@@ -22,12 +22,13 @@ export class ProfileDto {
     minLength: 3,
     maxLength: 30,
     description:
-      'Must have between 3 and 30 characters, only lowercase letters, numbers, and ' +
-      'underscores',
+      'Must be between 3 and 30 characters, only lowercase letters, numbers, and ' +
+      'underscores, and cannot be "api", "static", or "swagger"',
   })
-  @Matches(/^[a-z0-9_]+$/, {
+  @Matches(/^(?!api$|static$|swagger$)[a-z0-9_]+$/, {
     message:
-      'Handle can only contain lowercase letters, numbers, and underscores.',
+      'Handle can only contain lowercase letters, numbers, and underscores, and ' +
+      'cannot be "api", "static", or "swagger"',
   })
   @MinLength(3)
   @MaxLength(30)
