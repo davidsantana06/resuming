@@ -56,16 +56,16 @@ export class ProfileService {
 
   async delete(userId: string) {
     const { id, picture } = await this.getUnique({ userId });
-    if (picture) this.pictureService.delete(picture);
+    if (picture) await this.pictureService.delete(picture);
     return this.profileRepository.delete(id);
   }
 
   async uploadPicture(userId: string, file: Express.Multer.File) {
     const { id, picture } = await this.getUnique({ userId });
 
-    if (picture) this.pictureService.delete(picture);
+    if (picture) await this.pictureService.delete(picture);
 
-    const { filename } = this.pictureService.save(file);
+    const { filename } = await this.pictureService.save(file);
 
     return this.profileRepository.updatePicture(id, { picture: filename });
   }

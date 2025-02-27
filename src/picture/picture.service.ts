@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import * as fs from 'fs';
+import * as fs from 'fs-extra';
 import * as path from 'path';
 import { v4 as uuid4 } from 'uuid';
 import {
@@ -9,7 +9,7 @@ import {
 
 @Injectable()
 export class PictureService {
-  private readonly MAX_FILE_SIZE = 1024 * 256;
+  private readonly MAX_FILE_SIZE = 256 * 1024; /* ~ 256 KB */
   private readonly VALID_FILE_EXTENSIONS = ['.jpg', '.jpeg', '.png'];
 
   private extractExtension(file: Express.Multer.File): string {
@@ -20,7 +20,7 @@ export class PictureService {
     return uuid4() + extension;
   }
 
-  save(file: Express.Multer.File): { filename: string } {
+  async save(file: Express.Multer.File): Promise<{ filename: string }> {
     const isFileMissing = !file;
     if (isFileMissing) throw new FileMissingException();
 
@@ -33,12 +33,12 @@ export class PictureService {
 
     const filename = this.generateFilename(extension);
 
-    fs.writeFileSync(`public/img/${filename}`, file.buffer);
+    await fs.writeFile(`public/img/${filename}`, file.buffer);
 
     return { filename };
   }
 
-  delete(filename: string): void {
-    fs.unlinkSync(`public/img/${filename}`);
+  async delete(filename: string): Promise<void> {
+    await fs.unlink(`public/img/${filename}`);
   }
 }
