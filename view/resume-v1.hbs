@@ -1,13 +1,18 @@
+{{! resume v1 ~ regular !}}
+
 <html lang='en' data-theme='dark'>
   <head>
     <meta charset='UTF-8' />
     <meta name='viewport' content='width=device-width, initial-scale=1.0' />
-    <title>{{name}}</title>
+
+    <title>{{name}} - Resume Station</title>
     <link rel='icon' href='/static/favicon.ico' />
+
     <script
       src='https://kit.fontawesome.com/f3579f44cb.js'
       crossorigin='anonymous'
     ></script>
+
     <link rel='stylesheet' href='/static/vendor/bulma.min.css' />
     <link rel='stylesheet' href='/static/vendor/bulma-tooltip.min.css' />
     <link rel='stylesheet' href='/static/vendor/animate.min.css' />
@@ -53,6 +58,7 @@
             {{! ~ !}}
           </section>
         </div>
+
         <div class='column is-full is-9'>
           <section
             class='animate__animated animate__fadeInRight animate__delay-250ms'
@@ -100,7 +106,7 @@
             >
               <div class='mb-5'>
                 <h2 class='title is-5 has-text-weight-bold mb-1'>Education</h2>
-                <h3 class='subtitle is-italic is-6' lang='pt-br'>Formação</h3>
+                <h3 class='subtitle is-6 is-italic' lang='pt-br'>Formação</h3>
               </div>
               <div class='is-flex is-flex-direction-column is-row-gap-4 ml-5'>
                 {{#each educations}}
@@ -140,7 +146,7 @@
                 <h2 class='title is-5 has-text-weight-bold mb-1'>
                   Experiences
                 </h2>
-                <h3 class='subtitle is-italic is-6' lang='pt-br'>
+                <h3 class='subtitle is-6 is-italic' lang='pt-br'>
                   Experiências
                 </h3>
               </div>
@@ -190,7 +196,7 @@
           class='dropdown is-up is-right is-hoverable animate__animated animate__fadeInUp animate__delay-1500ms'
         >
           <div class='dropdown-trigger'>
-            <button class='button is-shadow'>
+            <button class='button'>
               <span class='icon is-small'>
                 <i class='fas fa-angle-up'></i>
               </span>
@@ -198,12 +204,40 @@
           </div>
           <div class='dropdown-menu'>
             <div class='dropdown-content'>
-              {{! ~ toggleTheme ~ !}}
+              {{! ~ toggle theme ~ !}}
               <a class='dropdown-item is-unselectable' onclick='toggleTheme()'>
                 <i class='fas fa-palette mr-2'></i>
                 <span>Toggle theme</span>
                 &bull;
-                <span class='is-italic is-size-7' lang='pt-br'>Alternar tema</span>
+                <span class='is-size-7 is-italic' lang='pt-br'>Alternar tema</span>
+              </a>
+              {{! ~ !}}
+
+              {{! ~ export as pdf ~ !}}
+              <hr class='dropdown-divider' />
+              <a
+                class='dropdown-item is-unselectable'
+                href='/{{handle}}/export?format=pdf'
+                target='_blank'
+              >
+                <i class='fas fa-download mr-2'></i>
+                <span>Save as PDF</span>
+                &bull;
+                <span class='is-size-7 is-italic' lang='pt-br'>Salvar como PDF</span>
+              </a>
+              {{! ~ !}}
+
+              {{! ~ export as png ~ !}}
+              <hr class='dropdown-divider' />
+              <a
+                class='dropdown-item is-unselectable'
+                href='/{{handle}}/export?format=png'
+                target='_blank'
+              >
+                <i class='fas fa-download mr-2'></i>
+                <span>Save as PNG</span>
+                &bull;
+                <span class='is-size-7 is-italic' lang='pt-br'>Salvar como PNG</span>
               </a>
               {{! ~ !}}
             </div>

@@ -1,10 +1,10 @@
 :root {
-  --bulma-primary-h: 195deg;
-  --bulma-primary-s: 70%;
-  --bulma-primary-l: 67%;
-  --bulma-link-h: 202deg;
-  --bulma-link-s: 61%;
-  --bulma-link-l: 54%;
+  --bulma-primary-h: 203deg;
+  --bulma-primary-s: 79%;
+  --bulma-primary-l: 57%;
+  --bulma-link-h: 204deg;
+  --bulma-link-s: 76%;
+  --bulma-link-l: 37%;
 }
 
 html,
@@ -32,11 +32,6 @@ body {
   border: 0 !important;
 }
 
-.is-disabled {
-  pointer-events: none;
-  opacity: 0.65;
-}
-
 .is-bottom-0 {
   bottom: 0;
 }
@@ -45,10 +40,8 @@ body {
   right: 0;
 }
 
-.is-shadow {
-  box-shadow:
-    0 4px 6px rgba(0, 0, 0, 0.1),
-    0 1px 3px rgba(0, 0, 0, 0.08);
+.is-size-8 {
+  font-size: 0.6rem;
 }
 
 .is-z-index-1 {
