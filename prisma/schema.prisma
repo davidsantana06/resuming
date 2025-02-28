@@ -67,6 +67,7 @@ model Profile {
   experiences Experience[]
   platforms   Platform[]
 
+  @@index([userId])
   @@index([handle])
 }
 
