@@ -39,8 +39,9 @@ export class ProfileController {
   })
   @ApiBody({ type: ProfileDto })
   @ApiResponse({ status: 201, description: 'Success', type: ProfileEntity })
-  @ApiResponse({ status: 409, description: 'Handle is already in use' })
-  @ApiResponse({ status: 429, description: 'Profile limit exceeded' })
+  @ApiResponse({ status: 400, description: 'Invalid data' })
+  @ApiResponse({ status: 409, description: 'Handle already in use' })
+  @ApiResponse({ status: 422, description: 'Profile limit exceeded' })
   @Post()
   async create(@CurrentUser() user: CurrentUserDto, @Body() dto: ProfileDto) {
     return await this.profileService.create(user.id, dto);
@@ -64,8 +65,9 @@ export class ProfileController {
   })
   @ApiBody({ type: ProfileDto })
   @ApiResponse({ status: 200, description: 'Success', type: ProfileEntity })
+  @ApiResponse({ status: 400, description: 'Invalid data' })
   @ApiResponse({ status: 404, description: 'Profile not found' })
-  @ApiResponse({ status: 409, description: 'Handle is already in use' })
+  @ApiResponse({ status: 409, description: 'Handle already in use' })
   @Put()
   async update(@CurrentUser() user: CurrentUserDto, @Body() dto: ProfileDto) {
     return await this.profileService.update(user.id, dto);
@@ -106,7 +108,7 @@ export class ProfileController {
     description: 'Success',
     type: ProfileEntity,
   })
-  @ApiResponse({ status: 400, description: 'Image invalid' })
+  @ApiResponse({ status: 400, description: 'Invalid file' })
   @ApiResponse({ status: 404, description: 'Profile not found' })
   @UseInterceptors(FileInterceptor('file'))
   @Post('upload-picture')

@@ -25,10 +25,12 @@ export class ProfileDto {
       'Must be between 3 and 30 characters, only lowercase letters, numbers, and ' +
       'underscores, and cannot be "api", "static", or "swagger"',
   })
-  @Matches(/^(?!api$|static$|swagger$)[a-z0-9_]+$/, {
+  @Matches(/^[a-z0-9_]+$/, {
     message:
-      'Handle can only contain lowercase letters, numbers, and underscores, and ' +
-      'cannot be "api", "static", or "swagger"',
+      'handle can only contain lowercase letters, numbers, and underscores',
+  })
+  @Matches(/^(?!api$|static$|swagger$).+$/, {
+    message: "handle cannot be in ['api', 'static', 'swagger']",
   })
   @MinLength(3)
   @MaxLength(30)

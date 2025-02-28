@@ -1,4 +1,4 @@
-import { Profile, Education, Experience, Platform } from '@prisma/client';
+import { Education, Experience, Platform, Profile } from '@prisma/client';
 
 export type CompleteProfile = Profile & {
   educations?: Education[];

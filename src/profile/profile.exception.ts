@@ -14,6 +14,6 @@ export class HandleAlreadyInUseException extends HttpException {
 
 export class ProfileLimitExceededException extends HttpException {
   constructor() {
-    super('User can have only one profile.', HttpStatus.UNPROCESSABLE_ENTITY);
+    super('User can have only one profile', HttpStatus.UNPROCESSABLE_ENTITY);
   }
 }

@@ -24,7 +24,8 @@ export class UserController {
   })
   @ApiBody({ type: UserDto })
   @ApiResponse({ status: 201, description: 'Success', type: UserEntity })
-  @ApiResponse({ status: 409, description: 'E-mail is already in use' })
+  @ApiResponse({ status: 400, description: 'Invalid data' })
+  @ApiResponse({ status: 409, description: 'E-mail already in use' })
   @Post()
   async create(@Body() dto: UserDto) {
     return await this.userService.create(dto);
@@ -37,9 +38,10 @@ export class UserController {
   @ApiBearerAuth('accessToken')
   @ApiBody({ type: UserDto })
   @ApiResponse({ status: 200, description: 'Success', type: UserEntity })
+  @ApiResponse({ status: 400, description: 'Invalid data' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   @ApiResponse({ status: 404, description: 'User not found' })
-  @ApiResponse({ status: 409, description: 'E-mail is already in use' })
+  @ApiResponse({ status: 409, description: 'E-mail already in use' })
   @UseGuards(JwtAuthGuard)
   @Put()
   async update(@CurrentUser() user: CurrentUserDto, @Body() dto: UserDto) {
