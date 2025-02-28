@@ -2,6 +2,7 @@ import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { SwaggerTheme, SwaggerThemeNameEnum } from 'swagger-themes';
 import { AppModule } from './app.module';
 import { HttpExceptionFilter } from './http-exception.filter';
 
@@ -10,7 +11,18 @@ async function bootstrap() {
 
   app.setViewEngine('hbs');
   app.setBaseViewsDir('view');
+
   app.useStaticAssets('static', { prefix: '/static' });
+
+  app.useGlobalFilters(new HttpExceptionFilter());
+
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      forbidNonWhitelisted: true,
+      transform: true,
+    }),
+  );
 
   const config = new DocumentBuilder()
     .setTitle('Resume Station')
@@ -28,20 +40,15 @@ async function bootstrap() {
       'accessToken',
     )
     .build();
-  const documentFactory = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('swagger/ui', app, documentFactory, {
+
+  const document = SwaggerModule.createDocument(app, config);
+  const theme = new SwaggerTheme();
+  const options = {
+    customCss: theme.getBuffer(SwaggerThemeNameEnum.DARK),
     jsonDocumentUrl: 'swagger/json',
-  });
+  };
 
-  app.useGlobalFilters(new HttpExceptionFilter());
-
-  app.useGlobalPipes(
-    new ValidationPipe({
-      whitelist: true,
-      forbidNonWhitelisted: true,
-      transform: true,
-    }),
-  );
+  SwaggerModule.setup('swagger/ui', app, document, options);
 
   await app.listen(process.env.PORT ?? 3000);
 }
