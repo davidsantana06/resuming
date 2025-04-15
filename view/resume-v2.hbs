@@ -10,134 +10,130 @@
   </head>
 
   <body>
-    <main class='m-6'>
-      <section>
-        <div
-          class='is-flex is-align-content-center is-justify-content-center mb-4'
-        >
-          {{! ~ picture ~ !}}
-          <figure class='image is-max-width-128 mr-4'>
-            <img class='is-rounded' src='{{baseUrl}}/static/img/{{picture}}' />
-          </figure>
+    <section>
+      <div
+        class='is-flex is-align-content-center is-justify-content-center mb-4'
+      >
+        {{! ~ picture ~ !}}
+        <figure class='image is-max-width-128 mr-4'>
+          <img class='is-rounded' src='{{baseUrl}}/static/img/{{picture}}' />
+        </figure>
+        {{! ~ !}}
+
+        <div class='is-flex is-flex-direction-column is-justify-content-center'>
+          {{! ~ name + title ~ !}}
+          <div class='mb-3'>
+            <h1 class='title is-6'>{{name}}</h1>
+            <h2 class='subtitle is-7'>{{title}}</h2>
+          </div>
           {{! ~ !}}
 
-          <div
-            class='is-flex is-flex-direction-column is-justify-content-center'
-          >
-            {{! ~ name + title ~ !}}
-            <div class='mb-3'>
-              <h1 class='title is-6'>{{name}}</h1>
-              <h2 class='subtitle is-7'>{{title}}</h2>
-            </div>
-            {{! ~ !}}
-
-            {{! ~ email ~ !}}
-            <div class='is-flex is-align-items-center'>
-              <figure class='image is-12x12 mr-2'>
-                <img src='{{baseUrl}}/static/img/_i-envelope.svg' />
-              </figure>
-              <span class='is-size-7'>{{email}}</span>
-            </div>
-            {{! ~ !}}
-
-            {{! ~ phone ~ !}}
-            {{#if phone}}
-              <div class='is-flex is-align-items-center mt-1'>
-                <figure class='image is-12x12 mr-2'>
-                  <img src='{{baseUrl}}/static/img/_i-phone.svg' />
-                </figure>
-                <span class='is-size-7'>{{phone}}</span>
-              </div>
-            {{/if}}
-            {{! ~ !}}
+          {{! ~ email ~ !}}
+          <div class='is-flex is-align-items-center'>
+            <figure class='image is-12x12 mr-2'>
+              <img src='{{baseUrl}}/static/img/_i-envelope.svg' />
+            </figure>
+            <span class='is-size-7'>{{email}}</span>
           </div>
+          {{! ~ !}}
+
+          {{! ~ phone ~ !}}
+          {{#if phone}}
+            <div class='is-flex is-align-items-center mt-1'>
+              <figure class='image is-12x12 mr-2'>
+                <img src='{{baseUrl}}/static/img/_i-phone.svg' />
+              </figure>
+              <span class='is-size-7'>{{phone}}</span>
+            </div>
+          {{/if}}
+          {{! ~ !}}
+        </div>
+      </div>
+
+      {{! ~ summary ~ !}}
+      <p class='is-size-7 has-text-justified'>
+        {{summary}}
+      </p>
+      {{! ~ !}}
+    </section>
+
+    {{! ~ educations ~ !}}
+    {{#if educations}}
+      <section class='mt-5'>
+        <div class='mb-4'>
+          <h2 class='title is-6 has-text-weight-bold mb-1'>Education</h2>
+          <h3 class='subtitle is-7 is-italic'>Formação</h3>
         </div>
 
-        {{! ~ summary ~ !}}
-        <p class='is-size-7 has-text-justified'>
-          {{summary}}
-        </p>
-        {{! ~ !}}
+        <div class='is-flex is-flex-direction-column is-row-gap-2 ml-4'>
+          {{#each educations}}
+            <div>
+              {{! ~ e.course ~ !}}
+              <h3 class='title is-7 has-text-weight-semibold mb-0'>
+                {{this.course}}
+              </h3>
+              {{! ~ !}}
+
+              {{! ~ e.institution ~ !}}
+              <h4 class='subtitle is-7 is-italic mt-1 mb-0'>
+                {{this.institution}}
+              </h4>
+              {{! ~ !}}
+
+              {{! ~ e.fromDate + e.toDate ~ !}}
+              <div class='is-size-8 is-uppercase mt-1'>
+                {{this.fromDate}}
+                —
+                {{this.toDate}}
+              </div>
+              {{! ~ !}}
+            </div>
+          {{/each}}
+        </div>
       </section>
+    {{/if}}
 
-      {{! ~ educations ~ !}}
-      {{#if educations}}
-        <section class='mt-5'>
-          <div class='mb-4'>
-            <h2 class='title is-6 has-text-weight-bold mb-1'>Education</h2>
-            <h3 class='subtitle is-7 is-italic'>Formação</h3>
-          </div>
+    {{! ~ experiences ~ !}}
+    {{#if experiences}}
+      <section class='mt-5'>
+        <div class='mb-4'>
+          <h2 class='title is-6 has-text-weight-bold mb-1'>Experiences</h2>
+          <h3 class='subtitle is-7 is-italic'>Experiências</h3>
+        </div>
 
-          <div class='is-flex is-flex-direction-column is-row-gap-2 ml-4'>
-            {{#each educations}}
-              <div>
-                {{! ~ e.course ~ !}}
-                <h3 class='title is-7 has-text-weight-semibold mb-0'>
-                  {{this.course}}
-                </h3>
-                {{! ~ !}}
+        <div class='is-flex is-flex-direction-column is-row-gap-2 ml-4'>
+          {{#each experiences}}
+            <div>
+              {{! ~ e.position ~ !}}
+              <h3 class='title is-7 has-text-weight-semibold mb-0'>
+                {{this.position}}
+              </h3>
+              {{! ~ !}}
 
-                {{! ~ e.institution ~ !}}
-                <h4 class='subtitle is-7 is-italic mt-1 mb-0'>
-                  {{this.institution}}
-                </h4>
-                {{! ~ !}}
+              {{! ~ e.company ~ !}}
+              <h4 class='subtitle is-7 is-italic mt-1 mb-0'>
+                {{this.company}}
+              </h4>
+              {{! ~ !}}
 
-                {{! ~ e.fromDate + e.toDate ~ !}}
-                <div class='is-size-8 is-uppercase mt-1'>
-                  {{this.fromDate}}
-                  —
-                  {{this.toDate}}
-                </div>
-                {{! ~ !}}
+              {{! ~ e.responsibilities ~ !}}
+              <p class='is-size-7 has-text-justified mt-1'>
+                {{this.responsibilities}}
+              </p>
+              {{! ~ !}}
+
+              {{! ~ e.fromDate + e.toDate ~ !}}
+              <div class='is-size-8 is-uppercase mt-1'>
+                {{this.fromDate}}
+                —
+                {{this.toDate}}
               </div>
-            {{/each}}
-          </div>
-        </section>
-      {{/if}}
-
-      {{! ~ experiences ~ !}}
-      {{#if experiences}}
-        <section class='mt-5'>
-          <div class='mb-4'>
-            <h2 class='title is-6 has-text-weight-bold mb-1'>Experiences</h2>
-            <h3 class='subtitle is-7 is-italic'>Experiências</h3>
-          </div>
-
-          <div class='is-flex is-flex-direction-column is-row-gap-2 ml-4'>
-            {{#each experiences}}
-              <div>
-                {{! ~ e.position ~ !}}
-                <h3 class='title is-7 has-text-weight-semibold mb-0'>
-                  {{this.position}}
-                </h3>
-                {{! ~ !}}
-
-                {{! ~ e.company ~ !}}
-                <h4 class='subtitle is-7 is-italic mt-1 mb-0'>
-                  {{this.company}}
-                </h4>
-                {{! ~ !}}
-
-                {{! ~ e.responsibilities ~ !}}
-                <p class='is-size-7 has-text-justified mt-1'>
-                  {{this.responsibilities}}
-                </p>
-                {{! ~ !}}
-
-                {{! ~ e.fromDate + e.toDate ~ !}}
-                <div class='is-size-8 is-uppercase mt-1'>
-                  {{this.fromDate}}
-                  —
-                  {{this.toDate}}
-                </div>
-                {{! ~ !}}
-              </div>
-            {{/each}}
-          </div>
-        </section>
-      {{/if}}
-      {{! ~ !}}
-    </main>
+              {{! ~ !}}
+            </div>
+          {{/each}}
+        </div>
+      </section>
+    {{/if}}
+    {{! ~ !}}
   </body>
 </html>

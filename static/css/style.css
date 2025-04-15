@@ -28,7 +28,7 @@ body {
   max-width: 256px;
 }
 
-.is-border-0 {
+.is-borderless {
   border: 0 !important;
 }
 

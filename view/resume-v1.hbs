@@ -8,20 +8,16 @@
     <title>{{name}} - Resume Station</title>
     <link rel='icon' href='/static/favicon.ico' />
 
-    <script
-      src='https://kit.fontawesome.com/f3579f44cb.js'
-      crossorigin='anonymous'
-    ></script>
-
     <link rel='stylesheet' href='/static/vendor/bulma.min.css' />
     <link rel='stylesheet' href='/static/vendor/bulma-tooltip.min.css' />
     <link rel='stylesheet' href='/static/vendor/animate.min.css' />
     <link rel='stylesheet' href='/static/css/style.css' />
+    <script src='/static/vendor/fontawesome.min.js'></script>
   </head>
 
   <body>
     <main class='container px-5 my-6'>
-      <div class='columns is-6'>
+      <div class='columns'>
         <div class='column is-full is-3'>
           <section
             class='is-flex is-flex-direction-column is-align-items-center'
@@ -45,7 +41,7 @@
               >
                 {{#each platforms}}
                   <a
-                    class='icon is-medium is-border-0 has-text-link has-tooltip-arrow has-tooltip-bottom'
+                    class='icon is-medium is-borderless has-text-link has-tooltip-arrow has-tooltip-bottom'
                     data-tooltip='{{this.name}}'
                     href='{{this.url}}'
                     target='_blank'
@@ -197,6 +193,11 @@
         >
           <div class='dropdown-trigger'>
             <button class='button'>
+              <div>
+                <span>Actions</span>
+                &bull;
+                <span class='is-size-7 is-italic' lang='pt-br'>Ações</span>
+              </div>
               <span class='icon is-small'>
                 <i class='fas fa-angle-up'></i>
               </span>
@@ -213,33 +214,26 @@
               </a>
               {{! ~ !}}
 
-              {{! ~ export as pdf ~ !}}
-              <hr class='dropdown-divider' />
-              <a
-                class='dropdown-item is-unselectable'
-                href='/{{handle}}/export?format=pdf'
-                target='_blank'
-              >
-                <i class='fas fa-download mr-2'></i>
-                <span>Save as PDF</span>
-                &bull;
-                <span class='is-size-7 is-italic' lang='pt-br'>Salvar como PDF</span>
-              </a>
-              {{! ~ !}}
-
-              {{! ~ export as png ~ !}}
-              <hr class='dropdown-divider' />
-              <a
-                class='dropdown-item is-unselectable'
-                href='/{{handle}}/export?format=png'
-                target='_blank'
-              >
-                <i class='fas fa-download mr-2'></i>
-                <span>Save as PNG</span>
-                &bull;
-                <span class='is-size-7 is-italic' lang='pt-br'>Salvar como PNG</span>
-              </a>
-              {{! ~ !}}
+              {{! ~ export ~ !}}
+              {{#each exportFormats}}
+                <hr class='dropdown-divider' />
+                <a
+                  class='dropdown-item is-unselectable'
+                  href='/{{../handle}}/export?format={{this}}'
+                  target='_blank'
+                >
+                  <i class='fas fa-download mr-2'></i>
+                  <span>
+                    Save as
+                    <span class='is-uppercase'>{{this}}</span>
+                  </span>
+                  &bull;
+                  <span class='is-size-7 is-italic' lang='pt-br'>
+                    Salvar como
+                    <span class='is-uppercase'>{{this}}</span>
+                  </span>
+                </a>
+              {{/each}}
             </div>
           </div>
         </div>

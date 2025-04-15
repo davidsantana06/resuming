@@ -46,7 +46,7 @@ export class AppController {
     const profile = await this.profileService.getUnique({
       handle: profileHandle,
     });
-    return { ...profile };
+    return { ...profile, exportFormats: ['pdf', 'png'] };
   }
 
   @ApiOperation({
