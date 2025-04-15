@@ -12,6 +12,10 @@ export class PictureService {
   private readonly MAX_FILE_SIZE = 256 * 1024; /* ~ 256 KB */
   private readonly VALID_FILE_EXTENSIONS = ['.jpg', '.jpeg', '.png'];
 
+  private mountPath(filename: string): string {
+    return `static/img/${filename}`;
+  }
+
   private extractExtension(file: Express.Multer.File): string {
     return path.extname(file.originalname).toLocaleLowerCase();
   }
@@ -32,13 +36,15 @@ export class PictureService {
     if (isFileInvalid) throw new FileInvalidException();
 
     const filename = this.generateFilename(extension);
+    const path = this.mountPath(filename);
 
-    await fs.writeFile(`public/img/${filename}`, file.buffer);
+    await fs.writeFile(path, file.buffer);
 
     return { filename };
   }
 
   async delete(filename: string): Promise<void> {
-    await fs.unlink(`public/img/${filename}`);
+    const path = this.mountPath(filename);
+    await fs.unlink(path);
   }
 }
