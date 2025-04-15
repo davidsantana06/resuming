@@ -1,11 +1,11 @@
 import { Injectable, OnModuleDestroy, OnModuleInit } from '@nestjs/common';
 import * as fs from 'fs-extra';
 import * as handlebars from 'handlebars';
-import * as puppeteer from 'puppeteer';
+import puppeteer, { Browser, Page } from 'puppeteer';
 
 @Injectable()
 export class ViewService implements OnModuleInit, OnModuleDestroy {
-  private browser: puppeteer.Browser;
+  private browser: Browser;
 
   async onModuleInit() {
     this.browser = await puppeteer.launch({
@@ -14,8 +14,13 @@ export class ViewService implements OnModuleInit, OnModuleDestroy {
     });
   }
 
+  private mountPath(template: string): string {
+    return `view/${template}.hbs`;
+  }
+
   async render(template: string, data: object) {
-    const content = await fs.readFile(`view/${template}.hbs`, 'utf8');
+    const path = this.mountPath(template);
+    const content = await fs.readFile(path, 'utf8');
     const compiled = handlebars.compile(content);
     return compiled({
       baseUrl: `http://localhost:${process.env.PORT ?? 3000}`,
@@ -28,17 +33,22 @@ export class ViewService implements OnModuleInit, OnModuleDestroy {
     data: object,
     format: 'pdf' | 'png',
   ): Promise<Buffer> {
+    const exportAsPdf = (page: Page) =>
+      page.pdf({
+        format: 'A4',
+        margin: { top: '50px', right: '40px', bottom: '50px', left: '40px' },
+      });
+
+    const exportAsPng = (page: Page) => page.screenshot({ fullPage: true });
+
     const html = await this.render(template, data);
 
     const page = await this.browser.newPage();
     await page.setContent(html, { waitUntil: 'networkidle0' });
 
-    const exportStrategies = {
-      pdf: () => page.pdf({ format: 'A4' }),
-      png: () => page.screenshot(),
-    };
+    const strategy = { pdf: exportAsPdf, png: exportAsPng }[format];
+    const file = await strategy(page);
 
-    const file = await exportStrategies[format]();
     await page.close();
 
     return Buffer.from(file);
