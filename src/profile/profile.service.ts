@@ -63,7 +63,8 @@ export class ProfileService {
   async uploadPicture(userId: string, file: Express.Multer.File) {
     const { id, picture } = await this.getUnique({ userId });
 
-    if (picture) await this.pictureService.delete(picture);
+    const canDelete = !!picture && picture !== '_picture.png';
+    if (canDelete) await this.pictureService.delete(picture);
 
     const { filename } = await this.pictureService.save(file);
 
