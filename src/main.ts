@@ -25,7 +25,7 @@ async function bootstrap() {
   );
 
   const config = new DocumentBuilder()
-    .setTitle('Resume Station')
+    .setTitle('Resuming')
     .setDescription('Platform dedicated to managing and sharing resumes')
     .addTag('app')
     .addTag('auth')
