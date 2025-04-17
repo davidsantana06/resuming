@@ -23,7 +23,7 @@
         <div class='is-flex is-flex-direction-column is-justify-content-center'>
           {{! ~ name + title ~ !}}
           <div class='mb-3'>
-            <h1 class='title is-6'>{{name}}</h1>
+            <h1 class='title is-6 mb-1'>{{name}}</h1>
             <h2 class='subtitle is-7'>{{title}}</h2>
           </div>
           {{! ~ !}}
@@ -134,6 +134,20 @@
         </div>
       </section>
     {{/if}}
+    {{! ~ !}}
+
+    {{! ~ stamp ! ~}}
+    <section class='mt-5'>
+      <div class='is-flex is-align-items-center is-justify-content-center'>
+        <figure class='image is-32x32 mx-2'>
+          <img src='{{baseUrl}}/static/img/_logo.png' />
+        </figure>
+        <div class='is-flex is-flex-direction-column is-size-7'>
+          <span>Made with</span>
+          <span class='has-text-weight-semibold'>Resuming</span>
+        </div>
+      </div>
+    </section>
     {{! ~ !}}
   </body>
 </html>

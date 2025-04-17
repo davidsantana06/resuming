@@ -33,20 +33,19 @@ export class ViewService implements OnModuleInit, OnModuleDestroy {
     data: object,
     format: 'pdf' | 'png',
   ): Promise<Buffer> {
-    const exportAsPdf = (page: Page) =>
+    const pdfStrategy = (page: Page) =>
       page.pdf({
         format: 'A4',
         margin: { top: '50px', right: '40px', bottom: '50px', left: '40px' },
       });
-
-    const exportAsPng = (page: Page) => page.screenshot({ fullPage: true });
+    const pngStrategy = (page: Page) => page.screenshot({ fullPage: true });
 
     const html = await this.render(template, data);
 
     const page = await this.browser.newPage();
     await page.setContent(html, { waitUntil: 'networkidle0' });
 
-    const strategy = { pdf: exportAsPdf, png: exportAsPng }[format];
+    const strategy = { pdf: pdfStrategy, png: pngStrategy }[format];
     const file = await strategy(page);
 
     await page.close();
