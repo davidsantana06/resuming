@@ -64,3 +64,7 @@ npm run start
 ### 📖 API Documentation
 
 To explore the technical details of the API, access **Swagger UI** at `/swagger/ui`. There, you will find a complete list of available endpoints, along with their input and output parameters.
+
+### ⚖️ License
+
+This project uses the **MIT License**, which allows you to use and modify the code as you wish. The only requirement is to give proper credit, acknowledging the effort and time dedicated to its development.
