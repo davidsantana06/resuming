@@ -65,6 +65,16 @@ npm run start
 
 To explore the technical details of the API, access **Swagger UI** at `/swagger/ui`. There, you will find a complete list of available endpoints, along with their input and output parameters.
 
+### 🤝 Donation
+
+Did you enjoy the project and want to support it financially? You can contribute via **PayPal** or, _para os meus compatriotas, através do **PIX**_ — just click on one of the options below:
+
+[![PayPal](https://img.shields.io/badge/PayPal-Donate-1040C1?labelColor=121661&style=for-the-badge&logo=paypal&link=https://www.paypal.com/donate/?hosted_button_id=2P9HPGUP7Z43S)](https://www.paypal.com/donate/?hosted_button_id=2P9HPGUP7Z43S)
+&nbsp;
+[![PIX](https://img.shields.io/badge/PIX-Doar-FBB88A?labelColor=F26722&style=for-the-badge&logo=pix&logoColor=ffffff&link=https://tipa.ai/davidsantana06)](https://tipa.ai/davidsantana06)
+
+This and other projects available on my profile were developed independently. Any support to help maintain this purpose is more than welcome! 💪
+
 ### ⚖️ License
 
 This project uses the **MIT License**, which allows you to use and modify the code as you wish. The only requirement is to give proper credit, acknowledging the effort and time dedicated to its development.
