@@ -13,6 +13,12 @@ export class AuthService {
     private userService: UserService,
   ) {}
 
+  private calculateExpirationDate(): Date {
+    const expirationDate = new Date();
+    expirationDate.setDate(expirationDate.getDate() + 7);
+    return expirationDate;
+  }
+
   async singIn(dto: SignInDto): Promise<AuthPayloadDto> {
     const { email, password } = dto;
 
@@ -24,9 +30,8 @@ export class AuthService {
 
     const accessToken = this.jwtService.sign({ sub: user.id });
 
-    const expiresAt = new Date();
-    expiresAt.setDate(expiresAt.getDate() + 7);
+    const expirationDate = this.calculateExpirationDate();
 
-    return { accessToken, expiresAt };
+    return { accessToken, expiresAt: expirationDate };
   }
 }

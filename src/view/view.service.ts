@@ -18,7 +18,7 @@ export class ViewService implements OnModuleInit, OnModuleDestroy {
     return `view/${template}.hbs`;
   }
 
-  async render(template: string, data: object) {
+  async render(template: string, data: object): Promise<string> {
     const path = this.mountPath(template);
     const content = await fs.readFile(path, 'utf8');
     const compiled = handlebars.compile(content);
