@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
 import { PictureService } from 'src/picture/picture.service';
 import {
   HandleAlreadyInUseException,
@@ -7,7 +8,6 @@ import {
 } from './profile.exception';
 import { ProfileRepository } from './profile.repository';
 import { ProfileDto } from './dto/profile.dto';
-import { CompleteProfile } from './type/complete-profile.type';
 
 @Injectable()
 export class ProfileService {
@@ -31,9 +31,7 @@ export class ProfileService {
     return this.profileRepository.create(userId, dto);
   }
 
-  async getUnique(
-    where: { id: string } | { userId: string } | { handle: string },
-  ): Promise<CompleteProfile> {
+  async getUnique(where: Prisma.ProfileWhereUniqueInput) {
     const profile = await this.profileRepository.findUnique(where);
 
     const isProfileNotFound = !profile;

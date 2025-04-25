@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { User } from '@prisma/client';
+import { Prisma } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 import {
   EmailAlreadyInUseException,
@@ -26,11 +26,11 @@ export class UserService {
     });
   }
 
-  findUnique(where: { id: string } | { email: string }): Promise<User | null> {
+  findUnique(where: Prisma.UserWhereUniqueInput) {
     return this.userRepository.findUnique(where);
   }
 
-  async getUnique(where: { id: string } | { email: string }): Promise<User> {
+  async getUnique(where: Prisma.UserWhereUniqueInput) {
     const user = await this.findUnique(where);
 
     const isUserNotFound = !user;

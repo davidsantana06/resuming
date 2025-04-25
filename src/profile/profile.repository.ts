@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Profile } from '@prisma/client';
+import { Prisma, Profile } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { ProfileDto } from './dto/profile.dto';
 import { CompleteProfile } from './type/complete-profile.type';
@@ -18,11 +18,12 @@ export class ProfileRepository {
         experiences: { create: experiences },
         platforms: { create: platforms },
       },
+      include: { educations: true, experiences: true, platforms: true },
     });
   }
 
   findUnique(
-    where: { id: string } | { userId: string } | { handle: string },
+    where: Prisma.ProfileWhereUniqueInput,
   ): Promise<CompleteProfile | null> {
     return this.prisma.profile.findUnique({
       where,

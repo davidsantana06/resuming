@@ -1,7 +1,9 @@
-import { Education, Experience, Platform, Profile } from '@prisma/client';
+import { Prisma } from '@prisma/client';
 
-export type CompleteProfile = Profile & {
-  educations?: Education[];
-  experiences?: Experience[];
-  platforms?: Platform[];
-};
+export type CompleteProfile = Prisma.ProfileGetPayload<{
+  include: {
+    educations: true;
+    experiences: true;
+    platforms: true;
+  };
+}>;
