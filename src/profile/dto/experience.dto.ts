@@ -4,7 +4,7 @@ import { IsOptional, IsString, MaxLength, MinLength } from 'class-validator';
 export class ExperienceDto {
   @ApiProperty({
     title: 'Position',
-    example: 'Backend Developer',
+    example: 'Academic Monitor',
     minLength: 3,
     maxLength: 50,
     description: 'Must have between 3 and 50 characters',
@@ -16,7 +16,7 @@ export class ExperienceDto {
 
   @ApiPropertyOptional({
     title: 'Company',
-    example: 'Open Source Software Foundation',
+    example: 'Federal Institute of Education, Science and Technology of Bahia',
     minLength: 3,
     maxLength: 100,
     description: 'Must have between 3 and 100 characters',
@@ -30,11 +30,9 @@ export class ExperienceDto {
   @ApiPropertyOptional({
     title: 'Responsibilities',
     example:
-      'Developed and maintained RESTful APIs using NestJS and TypeScript, ensuring ' +
-      'scalability and high performance. Implemented authentication and authorization ' +
-      'mechanisms with JWT and OAuth2. Designed and optimized PostgreSQL database ' +
-      'schemas, wrote unit and integration tests with Jest, and contributed to open-source ' +
-      'projects, collaborating with developers worldwide.',
+      'Taught Information Systems students key Java concepts such as exceptions, ' +
+      'threads, generics, collections, I/O, and JavaFX, and provided support with ' +
+      'assignments, academic projects, and exams.',
     minLength: 3,
     maxLength: 500,
     description: 'Must have between 3 and 500 characters',
@@ -47,7 +45,7 @@ export class ExperienceDto {
 
   @ApiProperty({
     title: 'From Date',
-    example: 'Jan. 2023',
+    example: 'Set. 2022',
     maxLength: 20,
     description: 'Can be any format with up to 20 characters',
   })
@@ -57,7 +55,7 @@ export class ExperienceDto {
 
   @ApiProperty({
     title: 'To Date',
-    example: 'Present',
+    example: 'Dez. 2022',
     maxLength: 20,
     description: 'Can be any format with up to 20 characters',
   })

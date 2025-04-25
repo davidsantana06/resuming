@@ -18,26 +18,26 @@ export class EducationEntity implements Education {
 
   @ApiProperty({
     title: 'Course',
-    example: 'Advanced TypeScript and Design Patterns',
+    example: "Bachelor's Degree in Information Systems",
   })
   course: string;
 
   @ApiProperty({
     title: 'Institution',
-    example: 'NestJS Academy',
+    example: 'Federal Institute of Education, Science and Technology of Bahia',
     nullable: true,
   })
   institution: string;
 
   @ApiProperty({
     title: 'From Date',
-    example: 'Sep. 2022',
+    example: 'Mai. 2021',
   })
   fromDate: string;
 
   @ApiProperty({
     title: 'To Date',
-    example: 'Dec. 2022',
+    example: 'Present',
   })
   toDate: string;
 

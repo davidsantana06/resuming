@@ -4,7 +4,7 @@ import { IsOptional, IsString, MaxLength, MinLength } from 'class-validator';
 export class EducationDto {
   @ApiProperty({
     title: 'Course',
-    example: 'Advanced TypeScript and Design Patterns',
+    example: "Bachelor's Degree in Information Systems",
     minLength: 3,
     maxLength: 50,
     description: 'Must have between 3 and 50 characters',
@@ -16,7 +16,7 @@ export class EducationDto {
 
   @ApiPropertyOptional({
     title: 'Institution',
-    example: 'NestJS Academy',
+    example: 'Federal Institute of Education, Science and Technology of Bahia',
     minLength: 3,
     maxLength: 100,
     description: 'Must have between 3 and 100 characters',
@@ -29,7 +29,7 @@ export class EducationDto {
 
   @ApiProperty({
     title: 'From Date',
-    example: 'Sep. 2022',
+    example: 'Mai. 2021',
     maxLength: 20,
     description: 'Can be any format with up to 20 characters',
   })
@@ -39,7 +39,7 @@ export class EducationDto {
 
   @ApiProperty({
     title: 'To Date',
-    example: 'Dec. 2022',
+    example: 'Present',
     maxLength: 20,
     description: 'Can be any format with up to 20 characters',
   })

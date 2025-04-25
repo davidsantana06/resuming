@@ -24,7 +24,7 @@ export class ExperienceEntity implements Experience {
 
   @ApiProperty({
     title: 'Company',
-    example: 'Open Source Software Foundation',
+    example: 'Federal Institute of Education, Science and Technology of Bahia',
     nullable: true,
   })
   company: string;
@@ -32,24 +32,22 @@ export class ExperienceEntity implements Experience {
   @ApiProperty({
     title: 'Responsabilities',
     example:
-      'Developed and maintained RESTful APIs using NestJS and TypeScript, ensuring ' +
-      'scalability and high performance. Implemented authentication and authorization ' +
-      'mechanisms with JWT and OAuth2. Designed and optimized PostgreSQL database ' +
-      'schemas, wrote unit and integration tests with Jest, and contributed to open-source ' +
-      'projects, collaborating with developers worldwide.',
+      'Taught Information Systems students key Java concepts such as exceptions, ' +
+      'threads, generics, collections, I/O, and JavaFX, and provided support with ' +
+      'assignments, academic projects, and exams.',
     nullable: true,
   })
   responsibilities: string;
 
   @ApiProperty({
     title: 'From Date',
-    example: 'Jan. 2023',
+    example: 'Set. 2022',
   })
   fromDate: string;
 
   @ApiProperty({
     title: 'To Date',
-    example: 'Present',
+    example: 'Dez. 2022',
   })
   toDate: string;
 

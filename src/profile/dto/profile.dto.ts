@@ -18,7 +18,7 @@ import { PlatformDto } from './platform.dto';
 export class ProfileDto {
   @ApiProperty({
     title: 'Handle',
-    example: 'handle7',
+    example: 'davidsantana06',
     minLength: 3,
     maxLength: 30,
     description:
@@ -38,7 +38,7 @@ export class ProfileDto {
 
   @ApiProperty({
     title: 'Name',
-    example: 'Anders Hejlsberg',
+    example: 'David Santana',
     minLength: 3,
     maxLength: 50,
     description: 'Must have between 3 and 50 characters',
@@ -63,10 +63,9 @@ export class ProfileDto {
   @ApiProperty({
     title: 'Summary',
     example:
-      'Creator of TypeScript and lead architect of C#. Passionate about programming ' +
-      'language design, static typing, and scalable software development. ' +
-      'Known for designing robust, developer-friendly tools that improve ' +
-      'code maintainability and performance.',
+      'I’m a technology enthusiast, committed to fostering proactivity, innovation, ' +
+      'and organization in the workplace. One of my recent accomplishments was fully ' +
+      "developing the Resuming platform — which, in fact, you're accessing right now.",
     minLength: 3,
     maxLength: 300,
     description: 'Must have between 3 and 300 characters',

@@ -1,10 +1,10 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Profile } from '@prisma/client';
+import { CompleteProfile } from '../type/complete-profile.type';
 import { EducationEntity } from './education.entity';
 import { ExperienceEntity } from './experience.entity';
 import { PlatformEntity } from './platform.entity';
 
-export class ProfileEntity implements Profile {
+export class ProfileEntity implements CompleteProfile {
   @ApiProperty({
     title: 'ID',
     example: '85585f2c-6c96-4ea3-82c6-0100ee0f13f8',
@@ -20,14 +20,14 @@ export class ProfileEntity implements Profile {
   userId: string;
 
   @ApiProperty({
-    title: 'Name',
-    example: 'handle7',
+    title: 'Handle',
+    example: 'davidsantana06',
   })
   handle: string;
 
   @ApiProperty({
     title: 'Name',
-    example: 'Anders Hejlsberg',
+    example: 'David Santana',
   })
   name: string;
 
@@ -40,10 +40,9 @@ export class ProfileEntity implements Profile {
   @ApiProperty({
     title: 'Summary',
     example:
-      'Creator of TypeScript and lead architect of C#. Passionate about programming ' +
-      'language design, static typing, and scalable software development. ' +
-      'Known for designing robust, developer-friendly tools that improve ' +
-      'code maintainability and performance.',
+      'I’m a technology enthusiast, committed to fostering proactivity, innovation, ' +
+      'and organization in the workplace. One of my recent accomplishments was fully ' +
+      "developing the Resuming platform — which, in fact, you're accessing right now.",
   })
   summary: string;
 
@@ -62,9 +61,8 @@ export class ProfileEntity implements Profile {
 
   @ApiProperty({
     title: 'Picture',
-    examples: ['_picture.png', '1cefffcf-ddd7-4e8a-8406-dd10d89f8060.png'],
+    example: '1cefffcf-ddd7-4e8a-8406-dd10d89f8060.png',
     readOnly: true,
-    nullable: true,
   })
   picture: string;
 
