@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  HttpCode,
   Post,
   Put,
   UploadedFile,
@@ -106,16 +107,27 @@ export class ProfileController {
   @ApiResponse({
     status: 200,
     description: 'Success',
-    type: ProfileEntity,
+    schema: {
+      type: 'object',
+      properties: {
+        message: { type: 'string' },
+      },
+    },
+    example: {
+      message:
+        'Picture uploaded successfully as 1cefffcf-ddd7-4e8a-8406-dd10d89f8060.png',
+    },
   })
   @ApiResponse({ status: 400, description: 'Invalid file' })
   @ApiResponse({ status: 404, description: 'Profile not found' })
   @UseInterceptors(FileInterceptor('file'))
+  @HttpCode(201)
   @Post('upload-picture')
   async uploadPicture(
     @CurrentUser() user: CurrentUserDto,
     @UploadedFile() file: Express.Multer.File,
   ) {
-    return await this.profileService.uploadPicture(user.id, file);
+    const { picture } = await this.profileService.uploadPicture(user.id, file);
+    return { message: `Picture uploaded successfully as ${picture}` };
   }
 }
