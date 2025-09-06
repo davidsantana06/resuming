@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class AuthPayloadDto {
+export default class AuthPayloadDto {
   @ApiProperty({
     title: 'Access Token',
     example: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...',

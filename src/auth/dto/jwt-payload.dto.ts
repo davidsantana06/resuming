@@ -1,3 +1,3 @@
-export class JwtPayloadDto {
+export default class JwtPayloadDto {
   sub: string;
 }

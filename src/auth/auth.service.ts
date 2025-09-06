@@ -1,37 +1,36 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
-import { UserService } from 'src/user/user.service';
-import { CredentialsInvalidException } from './auth.exception';
-import { AuthPayloadDto } from './dto/auth-payload.dto';
-import { SignInDto } from './dto/sign-in.dto';
+import UserService from 'src/user/user.service';
+import AuthPayloadDto from './dto/auth-payload.dto';
+import SignInDto from './dto/sign-in.dto';
+import InvalidCredentialsException from './exception/invalid-credentials.exception';
 
 @Injectable()
-export class AuthService {
+export default class AuthService {
   constructor(
     private jwtService: JwtService,
     private userService: UserService,
   ) {}
 
-  private calculateExpirationDate(): Date {
-    const expirationDate = new Date();
-    expirationDate.setDate(expirationDate.getDate() + 7);
-    return expirationDate;
-  }
-
-  async singIn(dto: SignInDto): Promise<AuthPayloadDto> {
+  async signIn(dto: SignInDto): Promise<AuthPayloadDto> {
     const { email, password } = dto;
 
     const user = await this.userService.findUnique({ email });
 
-    const isCredentialsInvalid =
-      !user || !(await bcrypt.compare(password, user.password));
-    if (isCredentialsInvalid) throw new CredentialsInvalidException();
+    const validatePassword = () => bcrypt.compare(password, user!.password);
+    const invalidCredentials = !user || !(await validatePassword());
+    if (invalidCredentials) throw new InvalidCredentialsException();
 
     const accessToken = this.jwtService.sign({ sub: user.id });
-
     const expirationDate = this.calculateExpirationDate();
 
     return { accessToken, expiresAt: expirationDate };
+  }
+
+  private calculateExpirationDate(): Date {
+    const expirationDate = new Date();
+    expirationDate.setDate(expirationDate.getDate() + 7);
+    return expirationDate;
   }
 }

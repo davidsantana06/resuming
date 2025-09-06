@@ -1,3 +1,3 @@
-export class CurrentUserDto {
+export default class CurrentUserDto {
   id: string;
 }
