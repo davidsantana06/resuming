@@ -6,7 +6,7 @@ import {
   MinLength,
 } from 'class-validator';
 
-export class UserDto {
+export default class UserDto {
   @ApiProperty({
     title: 'E-mail',
     example: 'name@domain.com',

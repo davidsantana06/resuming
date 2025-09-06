@@ -6,16 +6,16 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { CurrentUser } from 'src/auth/decorator/current-user.decorator';
-import { CurrentUserDto } from 'src/auth/dto/current-user.dto';
-import { JwtAuthGuard } from 'src/auth/guard/jwt-auth.guard';
-import { UserService } from './user.service';
-import { UserDto } from './dto/user.dto';
-import { UserEntity } from './entity/user.entity';
+import CurrentUser from 'src/auth/decorator/current-user.decorator';
+import CurrentUserDto from 'src/auth/dto/current-user.dto';
+import JwtAuthGuard from 'src/auth/guard/jwt-auth.guard';
+import UserService from './user.service';
+import UserDto from './dto/user.dto';
+import UserEntity from './entity/user.entity';
 
 @ApiTags('user')
 @Controller('api/user')
-export class UserController {
+export default class UserController {
   constructor(private readonly userService: UserService) {}
 
   @ApiOperation({
