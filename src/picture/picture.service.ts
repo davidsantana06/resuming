@@ -2,38 +2,23 @@ import { Injectable } from '@nestjs/common';
 import * as fs from 'fs-extra';
 import * as path from 'path';
 import { v4 as uuid4 } from 'uuid';
-import {
-  FileInvalidException,
-  FileMissingException,
-} from './picture.exception';
+import InvalidFileException from './exception/invalid-file.exception';
+import MissingFileException from './exception/missing-file.exception';
 
 @Injectable()
-export class PictureService {
+export default class PictureService {
+  readonly DEFAULT_FILENAME = '_picture.png';
   private readonly MAX_FILE_SIZE = 256 * 1024; /* ~ 256 KB */
   private readonly VALID_FILE_EXTENSIONS = ['.jpg', '.jpeg', '.png'];
 
-  private mountPath(filename: string): string {
-    return `static/img/${filename}`;
-  }
+  async save(file: Express.Multer.File | null): Promise<{ filename: string }> {
+    if (file == null) throw new MissingFileException();
 
-  private extractExtension(file: Express.Multer.File): string {
-    return path.extname(file.originalname).toLocaleLowerCase();
-  }
+    const extension = this.extractExtension(file.originalname);
 
-  private generateFilename(extension: string): string {
-    return uuid4() + extension;
-  }
-
-  async save(file: Express.Multer.File): Promise<{ filename: string }> {
-    const isFileMissing = !file;
-    if (isFileMissing) throw new FileMissingException();
-
-    const extension = this.extractExtension(file);
-
-    const isExtensionInvalid = !this.VALID_FILE_EXTENSIONS.includes(extension);
-    const isSizeInvalid = file.size > this.MAX_FILE_SIZE;
-    const isFileInvalid = isExtensionInvalid || isSizeInvalid;
-    if (isFileInvalid) throw new FileInvalidException();
+    const invalidExtension = !this.VALID_FILE_EXTENSIONS.includes(extension);
+    const invalidSize = file.size > this.MAX_FILE_SIZE;
+    if (invalidExtension || invalidSize) throw new InvalidFileException();
 
     const filename = this.generateFilename(extension);
     const path = this.mountPath(filename);
@@ -46,5 +31,17 @@ export class PictureService {
   async delete(filename: string): Promise<void> {
     const path = this.mountPath(filename);
     await fs.unlink(path);
+  }
+
+  private generateFilename(extension: string): string {
+    return uuid4() + extension;
+  }
+
+  private extractExtension(originalname: string): string {
+    return path.extname(originalname).toLocaleLowerCase();
+  }
+
+  private mountPath(filename: string): string {
+    return `static/img/${filename}`;
   }
 }
