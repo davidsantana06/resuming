@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsString, IsUrl, MaxLength, MinLength } from 'class-validator';
 
-export class PlatformDto {
+export default class PlatformDto {
   @ApiProperty({
     title: 'Name',
     example: 'GitHub',

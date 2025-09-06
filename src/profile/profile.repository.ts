@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma, Profile } from '@prisma/client';
-import { PrismaService } from 'src/prisma/prisma.service';
-import { ProfileDto } from './dto/profile.dto';
-import { CompleteProfile } from './type/complete-profile.type';
+import PrismaService from 'src/prisma/prisma.service';
+import ProfileDto from './dto/profile.dto';
+import CompleteProfile from './type/complete-profile.type';
 
 @Injectable()
-export class ProfileRepository {
+export default class ProfileRepository {
   constructor(private prisma: PrismaService) {}
 
   create(userId: string, data: ProfileDto): Promise<CompleteProfile> {

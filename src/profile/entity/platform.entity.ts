@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Platform } from '@prisma/client';
 
-export class PlatformEntity implements Platform {
+export default class PlatformEntity implements Platform {
   @ApiProperty({
     title: 'ID',
     example: 1,

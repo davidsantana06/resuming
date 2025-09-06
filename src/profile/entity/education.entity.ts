@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Education } from '@prisma/client';
 
-export class EducationEntity implements Education {
+export default class EducationEntity implements Education {
   @ApiProperty({
     title: 'ID',
     example: 1,

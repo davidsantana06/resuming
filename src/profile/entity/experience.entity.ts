@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Experience } from '@prisma/client';
 
-export class ExperienceEntity implements Experience {
+export default class ExperienceEntity implements Experience {
   @ApiProperty({
     title: 'ID',
     example: 1,

@@ -1,10 +1,10 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { CompleteProfile } from '../type/complete-profile.type';
-import { EducationEntity } from './education.entity';
-import { ExperienceEntity } from './experience.entity';
-import { PlatformEntity } from './platform.entity';
+import CompleteProfile from '../type/complete-profile.type';
+import EducationEntity from './education.entity';
+import ExperienceEntity from './experience.entity';
+import PlatformEntity from './platform.entity';
 
-export class ProfileEntity implements CompleteProfile {
+export default class ProfileEntity implements CompleteProfile {
   @ApiProperty({
     title: 'ID',
     example: '85585f2c-6c96-4ea3-82c6-0100ee0f13f8',

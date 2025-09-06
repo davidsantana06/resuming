@@ -1,7 +1,7 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { IsOptional, IsString, MaxLength, MinLength } from 'class-validator';
 
-export class ExperienceDto {
+export default class ExperienceDto {
   @ApiProperty({
     title: 'Position',
     example: 'Academic Monitor',

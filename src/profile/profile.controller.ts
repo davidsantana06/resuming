@@ -19,19 +19,19 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { CurrentUser } from 'src/auth/decorator/current-user.decorator';
-import { CurrentUserDto } from 'src/auth/dto/current-user.dto';
-import { JwtAuthGuard } from 'src/auth/guard/jwt-auth.guard';
-import { ProfileService } from './profile.service';
-import { ProfileDto } from './dto/profile.dto';
-import { ProfileEntity } from './entity/profile.entity';
+import CurrentUser from 'src/auth/decorator/current-user.decorator';
+import CurrentUserDto from 'src/auth/dto/current-user.dto';
+import JwtAuthGuard from 'src/auth/guard/jwt-auth.guard';
+import ProfileService from './profile.service';
+import ProfileDto from './dto/profile.dto';
+import ProfileEntity from './entity/profile.entity';
 
 @ApiTags('profile')
 @ApiBearerAuth('accessToken')
 @ApiResponse({ status: 401, description: 'Unauthorized' })
 @UseGuards(JwtAuthGuard)
 @Controller('api/profile')
-export class ProfileController {
+export default class ProfileController {
   constructor(private readonly profileService: ProfileService) {}
 
   @ApiOperation({
@@ -56,7 +56,7 @@ export class ProfileController {
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   @ApiResponse({ status: 404, description: 'Profile not found' })
   @Get()
-  async findManyByUserId(@CurrentUser() user: CurrentUserDto) {
+  async getUnique(@CurrentUser() user: CurrentUserDto) {
     return await this.profileService.getUnique({ userId: user.id });
   }
 

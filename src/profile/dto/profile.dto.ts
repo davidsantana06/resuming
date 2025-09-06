@@ -11,11 +11,11 @@ import {
   ValidateNested,
 } from 'class-validator';
 import { Type } from 'class-transformer';
-import { EducationDto } from './education.dto';
-import { ExperienceDto } from './experience.dto';
-import { PlatformDto } from './platform.dto';
+import EducationDto from './education.dto';
+import ExperienceDto from './experience.dto';
+import PlatformDto from './platform.dto';
 
-export class ProfileDto {
+export default class ProfileDto {
   @ApiProperty({
     title: 'Handle',
     example: 'davidsantana06',
