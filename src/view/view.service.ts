@@ -2,9 +2,10 @@ import { Injectable, OnModuleDestroy, OnModuleInit } from '@nestjs/common';
 import * as fs from 'fs-extra';
 import * as handlebars from 'handlebars';
 import puppeteer, { Browser, Page } from 'puppeteer';
+import { PORT } from 'src/environments';
 
 @Injectable()
-export class ViewService implements OnModuleInit, OnModuleDestroy {
+export default class ViewService implements OnModuleInit, OnModuleDestroy {
   private browser: Browser;
 
   async onModuleInit() {
@@ -14,8 +15,8 @@ export class ViewService implements OnModuleInit, OnModuleDestroy {
     });
   }
 
-  private mountPath(template: string): string {
-    return `view/${template}.hbs`;
+  async onModuleDestroy() {
+    await this.browser.close();
   }
 
   async render(template: string, data: object): Promise<string> {
@@ -23,7 +24,7 @@ export class ViewService implements OnModuleInit, OnModuleDestroy {
     const content = await fs.readFile(path, 'utf8');
     const compiled = handlebars.compile(content);
     return compiled({
-      baseUrl: `http://localhost:${process.env.PORT ?? 3000}`,
+      baseUrl: `http://localhost:${PORT}`,
       ...data,
     });
   }
@@ -53,7 +54,7 @@ export class ViewService implements OnModuleInit, OnModuleDestroy {
     return Buffer.from(file);
   }
 
-  async onModuleDestroy() {
-    await this.browser.close();
+  private mountPath(template: string): string {
+    return `view/${template}.hbs`;
   }
 }
