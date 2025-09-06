@@ -22,7 +22,7 @@
 
 ### 🛠️ Installation and Setup
 
-The system was developed using **Node.js 20**, and it is recommended to use this version to ensure compatibility. To set up the application, follow these instructions from the project root directory.
+The system was developed using **Node.js 22**, and it is recommended to use this version to ensure compatibility. To set up the application, follow these instructions from the project root directory.
 
 #### 1️⃣ Configure Environment Variables
 
