@@ -7,13 +7,13 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { Response } from 'express';
-import { ViewService } from './view/view.service';
-import { ProfileService } from './profile/profile.service';
+import ViewService from './view/view.service';
+import ProfileService from './profile/profile.service';
 
 @ApiTags('app')
 @ApiResponse({ status: 404, description: 'Profile not found' })
 @Controller()
-export class AppController {
+export default class AppController {
   constructor(
     private readonly profileService: ProfileService,
     private readonly viewService: ViewService,

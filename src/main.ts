@@ -3,8 +3,9 @@ import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { SwaggerTheme, SwaggerThemeNameEnum } from 'swagger-themes';
-import { AppModule } from './app.module';
-import { HttpExceptionFilter } from './http-exception.filter';
+import AppModule from './app.module';
+import { PORT } from './environments';
+import HttpExceptionFilter from './http-exception.filter';
 
 const setupViewEngine = (app: NestExpressApplication) => {
   app.setViewEngine('hbs');
@@ -64,7 +65,7 @@ const bootstrap = async () => {
   setupExceptionFilter(app);
   setupValidationPipe(app);
   setupSwagger(app);
-  await app.listen(process.env.PORT ?? 3000);
+  await app.listen(PORT);
 };
 
 bootstrap();

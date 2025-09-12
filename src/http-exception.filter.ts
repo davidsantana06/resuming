@@ -7,7 +7,7 @@ import {
 import { Request, Response } from 'express';
 
 @Catch(HttpException)
-export class HttpExceptionFilter implements ExceptionFilter {
+export default class HttpExceptionFilter implements ExceptionFilter {
   catch(exception: HttpException, host: ArgumentsHost) {
     const context = host.switchToHttp();
     const request = context.getRequest<Request>();
@@ -17,9 +17,8 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const status = exception.getStatus();
 
     const isApiRequest = url.startsWith('/api/') && url !== '/api/';
-
-    const isNotFound = !isApiRequest && status === 404;
-    if (isNotFound) return response.render('404');
+    const notFound = !isApiRequest && status === 404;
+    if (notFound) return response.render('404');
 
     return response.status(status).json(exception.getResponse());
   }

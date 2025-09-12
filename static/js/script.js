@@ -11,5 +11,5 @@ const toggleTheme = () => {
 
 document.addEventListener('DOMContentLoaded', () => {
   const theme = localStorage.getItem('theme');
-  if (theme) documentElement.dataset.theme = theme;
+  if (theme != null) documentElement.dataset.theme = theme;
 });
