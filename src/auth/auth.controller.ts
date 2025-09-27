@@ -1,5 +1,6 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import ApiCreatedResponses from 'src/common/decorator/api-created-responses.decorator';
 import AuthService from './auth.service';
 import AuthPayloadDto from './dto/auth-payload.dto';
 import SignInDto from './dto/sign-in.dto';
@@ -16,8 +17,7 @@ export default class AuthController {
       'authentication',
   })
   @ApiBody({ type: SignInDto })
-  @ApiResponse({ status: 201, description: 'Success', type: AuthPayloadDto })
-  @ApiResponse({ status: 400, description: 'Invalid data' })
+  @ApiCreatedResponses({ type: AuthPayloadDto })
   @ApiResponse({ status: 401, description: 'Invalid credentials' })
   @Post('sign-in')
   async signIn(@Body() dto: SignInDto) {

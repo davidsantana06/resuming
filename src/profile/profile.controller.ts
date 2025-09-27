@@ -22,6 +22,7 @@ import {
 import CurrentUser from 'src/auth/decorator/current-user.decorator';
 import CurrentUserDto from 'src/auth/dto/current-user.dto';
 import JwtAuthGuard from 'src/auth/guard/jwt-auth.guard';
+import ApiCreatedResponses from 'src/common/decorator/api-created-responses.decorator';
 import ProfileService from './profile.service';
 import ProfileDto from './dto/profile.dto';
 import ProfileEntity from './entity/profile.entity';
@@ -39,8 +40,7 @@ export default class ProfileController {
     description: 'Creates a profile, available only when signed in',
   })
   @ApiBody({ type: ProfileDto })
-  @ApiResponse({ status: 201, description: 'Success', type: ProfileEntity })
-  @ApiResponse({ status: 400, description: 'Invalid data' })
+  @ApiCreatedResponses({ type: ProfileEntity })
   @ApiResponse({ status: 409, description: 'Handle already in use' })
   @ApiResponse({ status: 422, description: 'Profile limit exceeded' })
   @Post()

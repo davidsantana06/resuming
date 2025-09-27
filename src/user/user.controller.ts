@@ -9,6 +9,7 @@ import {
 import CurrentUser from 'src/auth/decorator/current-user.decorator';
 import CurrentUserDto from 'src/auth/dto/current-user.dto';
 import JwtAuthGuard from 'src/auth/guard/jwt-auth.guard';
+import ApiCreatedResponses from 'src/common/decorator/api-created-responses.decorator';
 import UserService from './user.service';
 import UserDto from './dto/user.dto';
 import UserEntity from './entity/user.entity';
@@ -23,8 +24,7 @@ export default class UserController {
     description: 'Creates a new user account',
   })
   @ApiBody({ type: UserDto })
-  @ApiResponse({ status: 201, description: 'Success', type: UserEntity })
-  @ApiResponse({ status: 400, description: 'Invalid data' })
+  @ApiCreatedResponses({ type: UserEntity })
   @ApiResponse({ status: 409, description: 'E-mail already in use' })
   @Post()
   async create(@Body() dto: UserDto) {
