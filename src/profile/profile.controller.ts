@@ -23,6 +23,7 @@ import CurrentUser from 'src/auth/decorator/current-user.decorator';
 import CurrentUserDto from 'src/auth/dto/current-user.dto';
 import JwtAuthGuard from 'src/auth/guard/jwt-auth.guard';
 import ApiCreatedResponses from 'src/common/decorator/api-created-responses.decorator';
+import ApiUpdatedResponses from 'src/common/decorator/api-updated-responses.decorator';
 import ProfileService from './profile.service';
 import ProfileDto from './dto/profile.dto';
 import ProfileEntity from './entity/profile.entity';
@@ -63,9 +64,7 @@ export default class ProfileController {
     description: 'Updates your profile, available only when signed in',
   })
   @ApiBody({ type: ProfileDto })
-  @ApiResponse({ status: 200, description: 'Success', type: ProfileEntity })
-  @ApiResponse({ status: 400, description: 'Invalid data' })
-  @ApiResponse({ status: 404, description: 'Profile not found' })
+  @ApiUpdatedResponses({ type: ProfileEntity, entityName: 'Profile' })
   @ApiResponse({ status: 409, description: 'Handle already in use' })
   @Put()
   async update(@CurrentUser() user: CurrentUserDto, @Body() dto: ProfileDto) {

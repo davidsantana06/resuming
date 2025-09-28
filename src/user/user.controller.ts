@@ -5,6 +5,7 @@ import CurrentUser from 'src/auth/decorator/current-user.decorator';
 import CurrentUserDto from 'src/auth/dto/current-user.dto';
 import JwtAuthGuard from 'src/auth/guard/jwt-auth.guard';
 import ApiCreatedResponses from 'src/common/decorator/api-created-responses.decorator';
+import ApiUpdatedResponses from 'src/common/decorator/api-updated-responses.decorator';
 import UserService from './user.service';
 import UserDto from './dto/user.dto';
 import UserEntity from './entity/user.entity';
@@ -32,9 +33,7 @@ export default class UserController {
     description: 'Updates your user credentials, available only when signed in',
   })
   @ApiBody({ type: UserDto })
-  @ApiResponse({ status: 200, description: 'Success', type: UserEntity })
-  @ApiResponse({ status: 400, description: 'Invalid data' })
-  @ApiResponse({ status: 404, description: 'User not found' })
+  @ApiUpdatedResponses({ type: UserEntity, entityName: 'User' })
   @ApiResponse({ status: 409, description: 'E-mail already in use' })
   @UseGuards(JwtAuthGuard)
   @Put()
