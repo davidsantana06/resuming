@@ -23,6 +23,7 @@ import CurrentUser from 'src/auth/decorator/current-user.decorator';
 import CurrentUserDto from 'src/auth/dto/current-user.dto';
 import JwtAuthGuard from 'src/auth/guard/jwt-auth.guard';
 import ApiCreatedResponses from 'src/common/decorator/api-created-responses.decorator';
+import ApiDeletedResponses from 'src/common/decorator/api-deleted-responses.decorator';
 import ApiUpdatedResponses from 'src/common/decorator/api-updated-responses.decorator';
 import ProfileService from './profile.service';
 import ProfileDto from './dto/profile.dto';
@@ -75,8 +76,7 @@ export default class ProfileController {
     summary: 'Delete profile',
     description: 'Deletes your profile, available only when signed in',
   })
-  @ApiResponse({ status: 200, description: 'Success', type: ProfileEntity })
-  @ApiResponse({ status: 404, description: 'Profile not found' })
+  @ApiDeletedResponses({ type: ProfileEntity, entityName: 'Profile' })
   @Delete()
   async delete(@CurrentUser() user: CurrentUserDto) {
     return await this.profileService.delete(user.id);

@@ -5,6 +5,7 @@ import CurrentUser from 'src/auth/decorator/current-user.decorator';
 import CurrentUserDto from 'src/auth/dto/current-user.dto';
 import JwtAuthGuard from 'src/auth/guard/jwt-auth.guard';
 import ApiCreatedResponses from 'src/common/decorator/api-created-responses.decorator';
+import ApiDeletedResponses from 'src/common/decorator/api-deleted-responses.decorator';
 import ApiUpdatedResponses from 'src/common/decorator/api-updated-responses.decorator';
 import UserService from './user.service';
 import UserDto from './dto/user.dto';
@@ -46,8 +47,7 @@ export default class UserController {
     summary: 'Delete user',
     description: 'Deletes your user account, available only when signed in',
   })
-  @ApiResponse({ status: 200, description: 'Success', type: UserEntity })
-  @ApiResponse({ status: 404, description: 'User not found' })
+  @ApiDeletedResponses({ type: UserEntity, entityName: 'User' })
   @UseGuards(JwtAuthGuard)
   @Delete()
   async delete(@CurrentUser() user: CurrentUserDto) {

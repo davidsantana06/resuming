@@ -4,7 +4,7 @@ import { ApiResponse } from '@nestjs/swagger';
 const ApiCreatedResponses = (options: { type: Type<unknown> }) => {
   return applyDecorators(
     ApiResponse({
-      status: 200,
+      status: 201,
       description: 'Success',
       type: options.type,
     }),
