@@ -12,13 +12,13 @@ import {
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import {
-  ApiBearerAuth,
   ApiBody,
   ApiConsumes,
   ApiOperation,
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
+import ApiAuthProtected from 'src/auth/decorator/api-auth-protected.decorator';
 import CurrentUser from 'src/auth/decorator/current-user.decorator';
 import CurrentUserDto from 'src/auth/dto/current-user.dto';
 import JwtAuthGuard from 'src/auth/guard/jwt-auth.guard';
@@ -28,8 +28,7 @@ import ProfileDto from './dto/profile.dto';
 import ProfileEntity from './entity/profile.entity';
 
 @ApiTags('profile')
-@ApiBearerAuth('accessToken')
-@ApiResponse({ status: 401, description: 'Unauthorized' })
+@ApiAuthProtected()
 @UseGuards(JwtAuthGuard)
 @Controller('api/profile')
 export default class ProfileController {
@@ -52,8 +51,7 @@ export default class ProfileController {
     summary: 'Get profile',
     description: 'Returns your profile, available only when signed in',
   })
-  @ApiResponse({ status: 200, description: 'Success', type: [ProfileEntity] })
-  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  @ApiResponse({ status: 200, description: 'Success', type: ProfileEntity })
   @ApiResponse({ status: 404, description: 'Profile not found' })
   @Get()
   async getUnique(@CurrentUser() user: CurrentUserDto) {

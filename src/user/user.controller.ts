@@ -1,11 +1,6 @@
 import { Body, Controller, Delete, Post, Put, UseGuards } from '@nestjs/common';
-import {
-  ApiBearerAuth,
-  ApiBody,
-  ApiOperation,
-  ApiResponse,
-  ApiTags,
-} from '@nestjs/swagger';
+import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import ApiAuthProtected from 'src/auth/decorator/api-auth-protected.decorator';
 import CurrentUser from 'src/auth/decorator/current-user.decorator';
 import CurrentUserDto from 'src/auth/dto/current-user.dto';
 import JwtAuthGuard from 'src/auth/guard/jwt-auth.guard';
@@ -31,15 +26,14 @@ export default class UserController {
     return await this.userService.create(dto);
   }
 
+  @ApiAuthProtected()
   @ApiOperation({
     summary: 'Update user',
     description: 'Updates your user credentials, available only when signed in',
   })
-  @ApiBearerAuth('accessToken')
   @ApiBody({ type: UserDto })
   @ApiResponse({ status: 200, description: 'Success', type: UserEntity })
   @ApiResponse({ status: 400, description: 'Invalid data' })
-  @ApiResponse({ status: 401, description: 'Unauthorized' })
   @ApiResponse({ status: 404, description: 'User not found' })
   @ApiResponse({ status: 409, description: 'E-mail already in use' })
   @UseGuards(JwtAuthGuard)
@@ -48,13 +42,12 @@ export default class UserController {
     return await this.userService.update(user.id, dto);
   }
 
+  @ApiAuthProtected()
   @ApiOperation({
     summary: 'Delete user',
     description: 'Deletes your user account, available only when signed in',
   })
-  @ApiBearerAuth('accessToken')
   @ApiResponse({ status: 200, description: 'Success', type: UserEntity })
-  @ApiResponse({ status: 401, description: 'Unauthorized' })
   @ApiResponse({ status: 404, description: 'User not found' })
   @UseGuards(JwtAuthGuard)
   @Delete()
