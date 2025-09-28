@@ -1,12 +1,12 @@
 import { Body, Controller, Delete, Post, Put, UseGuards } from '@nestjs/common';
 import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import ApiAuthProtected from 'src/auth/decorator/api-auth-protected.decorator';
 import CurrentUser from 'src/auth/decorator/current-user.decorator';
 import CurrentUserDto from 'src/auth/dto/current-user.dto';
 import JwtAuthGuard from 'src/auth/guard/jwt-auth.guard';
-import ApiCreatedResponses from 'src/common/decorator/api-created-responses.decorator';
-import ApiDeletedResponses from 'src/common/decorator/api-deleted-responses.decorator';
-import ApiUpdatedResponses from 'src/common/decorator/api-updated-responses.decorator';
+import ApiAuthProtected from 'src/swagger/decorator/api-auth-protected.decorator';
+import ApiCreatedResponses from 'src/swagger/decorator/api-created-responses.decorator';
+import ApiDeletedResponses from 'src/swagger/decorator/api-deleted-responses.decorator';
+import ApiUpdatedResponses from 'src/swagger/decorator/api-updated-responses.decorator';
 import UserService from './user.service';
 import UserDto from './dto/user.dto';
 import UserEntity from './entity/user.entity';
