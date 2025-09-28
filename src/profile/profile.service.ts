@@ -35,27 +35,28 @@ export default class ProfileService {
   async update(userId: string, dto: ProfileDto) {
     const { handle } = dto;
 
-    await this.getUnique({ userId });
-    const profile = await this.profileRepository.findUnique({ handle });
+    const userProfile = await this.getUnique({ userId });
+    const otherProfile = await this.profileRepository.findUnique({ handle });
 
-    const handleAlreadyInUse = profile !== null && profile.id !== userId;
+    const handleAlreadyInUse =
+      otherProfile !== null && otherProfile.userId !== userId;
     if (handleAlreadyInUse) throw new HandleAlreadyInUseException(handle);
 
-    return this.profileRepository.update(userId, dto);
+    return this.profileRepository.update(userProfile.id, dto);
   }
 
   async delete(userId: string) {
-    const { picture } = await this.getUnique({ userId });
+    const { id, picture } = await this.getUnique({ userId });
     if (picture !== null) await this.pictureService.delete(picture);
-    return this.profileRepository.delete(userId);
+    return this.profileRepository.delete(id);
   }
 
   async uploadPicture(userId: string, file: Express.Multer.File) {
     const { picture } = await this.getUnique({ userId });
 
-    const canDelete =
+    const canDeleteCurrentPicture =
       picture !== null && picture !== this.pictureService.DEFAULT_FILENAME;
-    if (canDelete) await this.pictureService.delete(picture);
+    if (canDeleteCurrentPicture) await this.pictureService.delete(picture);
 
     const { filename } = await this.pictureService.save(file);
 
