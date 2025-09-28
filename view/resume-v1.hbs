@@ -1,4 +1,4 @@
-{{! resume v1 ~ regular !}}
+{{! resume v1 (regular) !}}
 
 <html lang='en' data-theme='dark'>
   <head>
@@ -22,7 +22,6 @@
           <section
             class='is-flex is-flex-direction-column is-align-items-center'
           >
-            {{! ~ picture ~ !}}
             <figure
               class='image is-max-width-256 animate__animated animate__fadeInLeft animate__delay-1s'
             >
@@ -32,9 +31,7 @@
                 alt='{{name}}'
               />
             </figure>
-            {{! ~ !}}
 
-            {{! ~ platforms ~ !}}
             {{#if platforms}}
               <div
                 class='is-flex is-column-gap-2 mt-5 animate__animated animate__fadeInLeft animate__delay-1250ms'
@@ -51,7 +48,6 @@
                 {{/each}}
               </div>
             {{/if}}
-            {{! ~ !}}
           </section>
         </div>
 
@@ -59,30 +55,23 @@
           <section
             class='animate__animated animate__fadeInRight animate__delay-250ms'
           >
-            {{! ~ name + title ~ !}}
             <div class='mb-3'>
               <h1 class='title is-5 mb-1'>{{name}}</h1>
               <h2 class='subtitle is-6'>{{title}}</h2>
             </div>
-            {{! ~ !}}
 
-            {{! ~ summary ~ !}}
             <p class='has-text-justified mb-3'>
               {{summary}}
             </p>
-            {{! ~ !}}
 
             <div class='is-flex is-flex-direction-column is-row-gap-1'>
-              {{! ~ email ~ !}}
               <div class='icon-text'>
                 <span class='icon'>
                   <i class='fas fa-envelope'></i>
                 </span>
                 <span>{{email}}</span>
               </div>
-              {{! ~ !}}
 
-              {{! ~ phone ~ !}}
               {{#if phone}}
                 <div class='icon-text'>
                   <span class='icon'>
@@ -91,11 +80,9 @@
                   <span>{{phone}}</span>
                 </div>
               {{/if}}
-              {{! ~ !}}
             </div>
           </section>
 
-          {{! ~ educations ~ !}}
           {{#if educations}}
             <section
               class='mt-6 animate__animated animate__fadeInRight animate__delay-500ms'
@@ -107,7 +94,6 @@
               <div class='is-flex is-flex-direction-column is-row-gap-4 ml-5'>
                 {{#each educations}}
                   <div>
-                    {{! ~ e.course + e.institution ~ !}}
                     <div>
                       <h3 class='title is-6 has-text-weight-semibold mb-0'>
                         {{this.course}}
@@ -118,9 +104,6 @@
                         </h4>
                       {{/if}}
                     </div>
-                    {{! ~ !}}
-
-                    {{! ~ e.fromDate + e.toDate ~ !}}
                     <div class='is-size-7 mt-2'>
                       {{this.fromDate}}
                       —
@@ -133,7 +116,6 @@
             </section>
           {{/if}}
 
-          {{! ~ experiences ~ !}}
           {{#if experiences}}
             <section
               class='mt-6 animate__animated animate__fadeInRight animate__delay-750ms'
@@ -149,7 +131,6 @@
               <div class='is-flex is-flex-direction-column is-row-gap-4 ml-5'>
                 {{#each experiences}}
                   <div>
-                    {{! ~ e.position + e.company ~ !}}
                     <div>
                       <h3 class='title is-6 has-text-weight-semibold mb-0'>
                         {{this.position}}
@@ -160,33 +141,26 @@
                         </h4>
                       {{/if}}
                     </div>
-                    {{! ~ !}}
 
-                    {{! ~ e.responsibilities ~ !}}
                     {{#if this.responsibilities}}
                       <p class='has-text-justified mt-2'>
                         {{this.responsibilities}}
                       </p>
                     {{/if}}
-                    {{! ~ !}}
 
-                    {{! ~ e.fromDate + e.toDate ~ !}}
                     <div class='is-size-7 mt-2'>
                       {{this.fromDate}}
                       —
                       {{this.toDate}}
                     </div>
-                    {{! ~ !}}
                   </div>
                 {{/each}}
               </div>
             </section>
           {{/if}}
-          {{! ~ !}}
         </div>
       </div>
 
-      {{! ~ actions ~ !}}
       <div class='is-position-fixed is-right-0 is-bottom-0 mr-5 mb-5'>
         <div
           class='dropdown is-up is-right is-hoverable animate__animated animate__fadeInUp animate__delay-1500ms'
@@ -205,40 +179,34 @@
           </div>
           <div class='dropdown-menu'>
             <div class='dropdown-content'>
-              {{! ~ toggle theme ~ !}}
               <a class='dropdown-item is-unselectable' onclick='toggleTheme()'>
                 <i class='fas fa-palette mr-2'></i>
                 <span>Toggle theme</span>
                 &bull;
                 <span class='is-size-7 is-italic' lang='pt-br'>Alternar tema</span>
               </a>
-              {{! ~ !}}
 
-              {{! ~ export ~ !}}
-              {{#each exportFormats}}
-                <hr class='dropdown-divider' />
-                <a
-                  class='dropdown-item is-unselectable'
-                  href='/{{../handle}}/export?format={{this}}'
-                  target='_blank'
-                >
-                  <i class='fas fa-download mr-2'></i>
-                  <span>
-                    Save as
-                    <span class='is-uppercase'>{{this}}</span>
-                  </span>
-                  &bull;
-                  <span class='is-size-7 is-italic' lang='pt-br'>
-                    Salvar como
-                    <span class='is-uppercase'>{{this}}</span>
-                  </span>
-                </a>
-              {{/each}}
+              <hr class='dropdown-divider' />
+              <a
+                class='dropdown-item is-unselectable'
+                href='/{{handle}}/export'
+                target='_blank'
+              >
+                <i class='fas fa-download mr-2'></i>
+                <span>
+                  Save as
+                  <span class='is-uppercase'>PDF</span>
+                </span>
+                &bull;
+                <span class='is-size-7 is-italic' lang='pt-br'>
+                  Salvar como
+                  <span class='is-uppercase'>PDF</span>
+                </span>
+              </a>
             </div>
           </div>
         </div>
       </div>
-      {{! ~ !}}
     </main>
 
     <script src='/static/js/script.js'></script>
