@@ -1,11 +1,5 @@
-import { Controller, Get, Param, Query, Render, Res } from '@nestjs/common';
-import {
-  ApiOperation,
-  ApiParam,
-  ApiQuery,
-  ApiResponse,
-  ApiTags,
-} from '@nestjs/swagger';
+import { Controller, Get, Param, Render, Res } from '@nestjs/common';
+import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
 import ViewService from './view/view.service';
 import ProfileService from './profile/profile.service';
@@ -46,13 +40,12 @@ export default class AppController {
     const profile = await this.profileService.getUnique({
       handle: profileHandle,
     });
-    return { ...profile, exportFormats: ['pdf', 'png'] };
+    return { ...profile };
   }
 
   @ApiOperation({
     summary: 'Export a resume',
-    description:
-      'Exports the resume for the given profile handle as PDF or PNG file',
+    description: 'Exports the resume for the given profile handle as PDF',
   })
   @ApiParam({
     name: 'profileHandle',
@@ -70,40 +63,25 @@ export default class AppController {
           example: 'JVBERi0xLjcKCjEgMCBvYmogICUgZW50cnk...',
         },
       },
-      'application/png': {
-        schema: {
-          type: 'string',
-          format: 'binary',
-          example: 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAY...',
-        },
-      },
     },
-  })
-  @ApiQuery({
-    name: 'format',
-    enum: ['pdf', 'png'],
-    description: 'The file format',
-    required: true,
   })
   @Get(':profileHandle/export')
   async exportResume(
     @Param('profileHandle') profileHandle: string,
-    @Query('format') format: 'pdf' | 'png',
     @Res() res: Response,
   ) {
     const { name, ...rest } = await this.profileService.getUnique({
       handle: profileHandle,
     });
 
-    const buffer = await this.viewService.export(
-      'resume-v2',
-      { name, ...rest },
-      format,
-    );
-    const filename = `${encodeURIComponent(name)}.${format}`;
+    const buffer = await this.viewService.export('resume-v2', {
+      name,
+      ...rest,
+    });
+    const filename = `${encodeURIComponent(name)}.pdf`;
 
     res.set({
-      'Content-Type': `application/${format}`,
+      'Content-Type': 'application/pdf',
       'Content-Disposition': `attachment; filename*=UTF-8''${filename}`,
     });
     res.send(buffer);

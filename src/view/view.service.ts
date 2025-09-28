@@ -1,7 +1,7 @@
 import { Injectable, OnModuleDestroy, OnModuleInit } from '@nestjs/common';
 import * as fs from 'fs-extra';
 import * as handlebars from 'handlebars';
-import puppeteer, { Browser, Page } from 'puppeteer';
+import puppeteer, { Browser } from 'puppeteer';
 import { PORT } from 'src/environments';
 
 @Injectable()
@@ -29,29 +29,20 @@ export default class ViewService implements OnModuleInit, OnModuleDestroy {
     });
   }
 
-  async export(
-    template: string,
-    data: object,
-    format: 'pdf' | 'png',
-  ): Promise<Buffer> {
-    const pdfStrategy = (page: Page) =>
-      page.pdf({
-        format: 'A4',
-        margin: { top: '50px', right: '40px', bottom: '50px', left: '40px' },
-      });
-    const pngStrategy = (page: Page) => page.screenshot({ fullPage: true });
-
+  async export(template: string, data: object): Promise<Buffer> {
     const html = await this.render(template, data);
 
     const page = await this.browser.newPage();
     await page.setContent(html, { waitUntil: 'networkidle0' });
 
-    const strategy = { pdf: pdfStrategy, png: pngStrategy }[format];
-    const file = await strategy(page);
+    const pdfBytes = await page.pdf({
+      format: 'A4',
+      margin: { top: '50px', right: '40px', bottom: '50px', left: '40px' },
+    });
 
     await page.close();
 
-    return Buffer.from(file);
+    return Buffer.from(pdfBytes);
   }
 
   private mountPath(template: string): string {
