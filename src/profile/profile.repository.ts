@@ -14,9 +14,9 @@ export default class ProfileRepository {
       data: {
         ...rest,
         user: { connect: { id: userId } },
-        educations: { create: educations },
-        experiences: { create: experiences },
         platforms: { create: platforms },
+        experiences: { create: experiences },
+        educations: { create: educations },
       },
       include: { educations: true, experiences: true, platforms: true },
     });
@@ -37,9 +37,9 @@ export default class ProfileRepository {
       where: { id },
       data: {
         ...rest,
-        educations: { deleteMany: { profileId: id }, create: educations },
-        experiences: { deleteMany: { profileId: id }, create: experiences },
         platforms: { deleteMany: { profileId: id }, create: platforms },
+        experiences: { deleteMany: { profileId: id }, create: experiences },
+        educations: { deleteMany: { profileId: id }, create: educations },
       },
       include: { educations: true, experiences: true, platforms: true },
     });

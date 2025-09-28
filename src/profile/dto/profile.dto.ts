@@ -97,16 +97,16 @@ export default class ProfileDto {
   phone?: string;
 
   @ApiPropertyOptional({
-    title: 'Educations',
-    type: [EducationDto],
-    maxItems: 5,
-    description: 'Must have up to 5 items',
+    title: 'Platforms',
+    type: [PlatformDto],
+    maxItems: 3,
+    description: 'Must have up to 3 items',
   })
   @IsOptional()
-  @ArrayMaxSize(5)
+  @ArrayMaxSize(3)
   @ValidateNested({ each: true })
-  @Type(() => EducationDto)
-  educations?: EducationDto[];
+  @Type(() => PlatformDto)
+  platforms?: PlatformDto[];
 
   @ApiPropertyOptional({
     title: 'Experiences',
@@ -121,14 +121,14 @@ export default class ProfileDto {
   experiences?: ExperienceDto[];
 
   @ApiPropertyOptional({
-    title: 'Platforms',
-    type: [PlatformDto],
-    maxItems: 3,
-    description: 'Must have up to 3 items',
+    title: 'Educations',
+    type: [EducationDto],
+    maxItems: 5,
+    description: 'Must have up to 5 items',
   })
   @IsOptional()
-  @ArrayMaxSize(3)
+  @ArrayMaxSize(5)
   @ValidateNested({ each: true })
-  @Type(() => PlatformDto)
-  platforms?: PlatformDto[];
+  @Type(() => EducationDto)
+  educations?: EducationDto[];
 }

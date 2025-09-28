@@ -81,11 +81,11 @@ export default class ProfileEntity implements CompleteProfile {
   updatedAt: Date;
 
   @ApiProperty({
-    title: 'Educations',
-    type: [EducationEntity],
+    title: 'Platforms',
+    type: [PlatformEntity],
     nullable: true,
   })
-  educations: EducationEntity[];
+  platforms: PlatformEntity[];
 
   @ApiProperty({
     title: 'Experiences',
@@ -95,9 +95,9 @@ export default class ProfileEntity implements CompleteProfile {
   experiences: ExperienceEntity[];
 
   @ApiProperty({
-    title: 'Platforms',
-    type: [PlatformEntity],
+    title: 'Educations',
+    type: [EducationEntity],
     nullable: true,
   })
-  platforms: PlatformEntity[];
+  educations: EducationEntity[];
 }
