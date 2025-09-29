@@ -30,17 +30,17 @@ export default class ExperienceDto {
   @ApiPropertyOptional({
     title: 'Responsibilities',
     example:
-      'Taught Information Systems students key Java concepts such as exceptions, ' +
-      'threads, generics, collections, I/O, and JavaFX, and provided support with ' +
-      'assignments, academic projects, and exams.',
+      'Taught and provided support in practical Java activities, including ' +
+      'Exceptions, Threads, Collections, I/O, and JavaFX, resulting in significant ' +
+      'improvement in class performance throughout the semester.',
     minLength: 3,
-    maxLength: 500,
-    description: 'Must have between 3 and 500 characters',
+    maxLength: 2000,
+    description: 'Must have between 3 and 2000 characters',
   })
   @IsOptional()
   @IsString()
   @MinLength(3)
-  @MaxLength(500)
+  @MaxLength(2000)
   responsibilities?: string;
 
   @ApiProperty({
