@@ -70,15 +70,17 @@ export default class AppController {
     @Param('profileHandle') profileHandle: string,
     @Res() res: Response,
   ) {
-    const { name, ...rest } = await this.profileService.getUnique({
+    const profile = await this.profileService.getUnique({
       handle: profileHandle,
     });
 
+    const contacts = this.profileService.composeContacts(profile);
+
     const buffer = await this.viewService.export('resume-v2', {
-      name,
-      ...rest,
+      ...profile,
+      contacts,
     });
-    const filename = `${encodeURIComponent(name)}.pdf`;
+    const filename = `${encodeURIComponent(profile.name)}.pdf`;
 
     res.set({
       'Content-Type': 'application/pdf',

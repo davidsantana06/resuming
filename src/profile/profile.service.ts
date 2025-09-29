@@ -6,6 +6,8 @@ import ProfileDto from './dto/profile.dto';
 import HandleAlreadyInUseException from './exception/handle-already-in-use.exception';
 import ProfileLimitExceededException from './exception/profile-limit-exceed-exception';
 import ProfileNotFoundException from './exception/profile-not-found.exception';
+import CompleteProfile from './type/complete-profile.type';
+import ProfileContact from './type/profile-contact.type';
 
 @Injectable()
 export default class ProfileService {
@@ -61,5 +63,26 @@ export default class ProfileService {
     const { filename } = await this.pictureService.save(file);
 
     return this.profileRepository.updatePicture(userId, { picture: filename });
+  }
+
+  composeContacts(profile: CompleteProfile): ProfileContact[] {
+    const { email, phone, platforms } = profile;
+
+    const contacts = [{ name: email, url: `mailto:${email}` }];
+
+    if (phone !== null) contacts.push({ name: phone, url: `tel:${phone}` });
+
+    contacts.push(
+      ...platforms.map(({ url }) => ({
+        name: this.cleanPlatformUrl(url),
+        url,
+      })),
+    );
+
+    return contacts;
+  }
+
+  private cleanPlatformUrl(url: string): string {
+    return url.replace(/^(https?:\/\/)?(www\.)?/, '');
   }
 }
