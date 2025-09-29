@@ -24,13 +24,13 @@ export default class ExperienceEntity implements Experience {
 
   @ApiProperty({
     title: 'Company',
-    example: 'Federal Institute of Education, Science and Technology of Bahia',
+    example: 'Federal Institute of Bahia',
     nullable: true,
   })
   company: string;
 
   @ApiProperty({
-    title: 'Responsabilities',
+    title: 'Responsibilities',
     example:
       'Taught Information Systems students key Java concepts such as exceptions, ' +
       'threads, generics, collections, I/O, and JavaFX, and provided support with ' +
@@ -41,13 +41,13 @@ export default class ExperienceEntity implements Experience {
 
   @ApiProperty({
     title: 'From Date',
-    example: 'Set. 2022',
+    example: 'Sep. 2022',
   })
   fromDate: string;
 
   @ApiProperty({
     title: 'To Date',
-    example: 'Dez. 2022',
+    example: 'Dec. 2022',
   })
   toDate: string;
 

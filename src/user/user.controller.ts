@@ -22,7 +22,7 @@ export default class UserController {
   })
   @ApiBody({ type: UserDto })
   @ApiCreatedResponses({ type: UserEntity })
-  @ApiResponse({ status: 409, description: 'E-mail already in use' })
+  @ApiResponse({ status: 409, description: 'Email already in use' })
   @Post()
   async create(@Body() dto: UserDto) {
     return await this.userService.create(dto);
@@ -35,7 +35,7 @@ export default class UserController {
   })
   @ApiBody({ type: UserDto })
   @ApiUpdatedResponses({ type: UserEntity, entityName: 'User' })
-  @ApiResponse({ status: 409, description: 'E-mail already in use' })
+  @ApiResponse({ status: 409, description: 'Email already in use' })
   @UseGuards(JwtAuthGuard)
   @Put()
   async update(@CurrentUser() user: CurrentUserDto, @Body() dto: UserDto) {

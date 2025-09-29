@@ -33,21 +33,21 @@ export default class ProfileEntity implements CompleteProfile {
 
   @ApiProperty({
     title: 'Title',
-    example: 'Software Engineer',
+    example: 'Full Stack Developer',
   })
   title: string;
 
   @ApiProperty({
     title: 'Summary',
     example:
-      'I’m a technology enthusiast, committed to fostering proactivity, innovation, ' +
-      'and organization in the workplace. One of my recent accomplishments was fully ' +
-      "developing the Resuming platform — which, in fact, you're accessing right now.",
+      'Full Stack Developer with 3+ years of experience designing and implementing ' +
+      'scalable, secure, and user-focused web applications. Recently developed the ' +
+      'Resuming platform — the very one you are using now.',
   })
   summary: string;
 
   @ApiProperty({
-    title: 'E-mail',
+    title: 'Email',
     example: 'name@domain.com',
   })
   email: string;

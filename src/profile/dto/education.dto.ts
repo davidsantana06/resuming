@@ -16,7 +16,7 @@ export default class EducationDto {
 
   @ApiPropertyOptional({
     title: 'Institution',
-    example: 'Federal Institute of Education, Science and Technology of Bahia',
+    example: 'Federal Institute of Bahia',
     minLength: 3,
     maxLength: 100,
     description: 'Must have between 3 and 100 characters',
@@ -29,7 +29,7 @@ export default class EducationDto {
 
   @ApiProperty({
     title: 'From Date',
-    example: 'Mai. 2021',
+    example: 'May 2021',
     maxLength: 20,
     description: 'Can be any format with up to 20 characters',
   })

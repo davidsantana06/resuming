@@ -24,14 +24,14 @@ export default class EducationEntity implements Education {
 
   @ApiProperty({
     title: 'Institution',
-    example: 'Federal Institute of Education, Science and Technology of Bahia',
+    example: 'Federal Institute of Bahia',
     nullable: true,
   })
   institution: string;
 
   @ApiProperty({
     title: 'From Date',
-    example: 'Mai. 2021',
+    example: 'May 2021',
   })
   fromDate: string;
 

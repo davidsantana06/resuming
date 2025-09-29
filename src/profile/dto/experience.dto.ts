@@ -16,7 +16,7 @@ export default class ExperienceDto {
 
   @ApiPropertyOptional({
     title: 'Company',
-    example: 'Federal Institute of Education, Science and Technology of Bahia',
+    example: 'Federal Institute of Bahia',
     minLength: 3,
     maxLength: 100,
     description: 'Must have between 3 and 100 characters',
@@ -45,7 +45,7 @@ export default class ExperienceDto {
 
   @ApiProperty({
     title: 'From Date',
-    example: 'Set. 2022',
+    example: 'Sep. 2022',
     maxLength: 20,
     description: 'Can be any format with up to 20 characters',
   })
@@ -55,7 +55,7 @@ export default class ExperienceDto {
 
   @ApiProperty({
     title: 'To Date',
-    example: 'Dez. 2022',
+    example: 'Dec. 2022',
     maxLength: 20,
     description: 'Can be any format with up to 20 characters',
   })
