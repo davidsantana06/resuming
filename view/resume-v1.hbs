@@ -23,7 +23,7 @@
             class='is-flex is-flex-direction-column is-align-items-center'
           >
             <figure
-              class='image is-max-width-256 animate__animated animate__fadeInLeft animate__delay-1s'
+              class='image is-max-width-192 animate__animated animate__fadeInLeft animate__delay-1s'
             >
               <img
                 class='is-rounded'
@@ -34,7 +34,7 @@
 
             {{#if platforms}}
               <div
-                class='is-flex is-column-gap-2 mt-5 animate__animated animate__fadeInLeft animate__delay-1250ms'
+                class='is-flex is-column-gap-2 mt-3 animate__animated animate__fadeInLeft animate__delay-1500ms'
               >
                 {{#each platforms}}
                   <a
@@ -60,38 +60,66 @@
               <h2 class='subtitle is-6'>{{title}}</h2>
             </div>
 
-            <p class='has-text-justified mb-3'>
-              {{summary}}
-            </p>
-
-            <div class='is-flex is-flex-direction-column is-row-gap-1'>
-              <div class='icon-text'>
-                <span class='icon'>
-                  <i class='fas fa-envelope'></i>
-                </span>
-                <span>{{email}}</span>
-              </div>
-
-              {{#if phone}}
-                <div class='icon-text'>
-                  <span class='icon'>
-                    <i class='fas fa-phone'></i>
-                  </span>
-                  <span>{{phone}}</span>
-                </div>
-              {{/if}}
-            </div>
+            <p class='has-text-justified mb-3'>{{summary}}</p>
           </section>
+
+          {{#if experiences}}
+            <section
+              class='mt-5 animate__animated animate__fadeInRight animate__delay-500ms'
+            >
+              <div class='is-flex is-align-items-center mb-4'>
+                <h2 class='title is-5 has-text-weight-bold mb-1'>
+                  Experiences
+                </h2>
+                &nbsp;
+                <h3 class='subtitle is-6 is-italic' lang='pt-br'>
+                  (Experiências)
+                </h3>
+              </div>
+              <div class='is-flex is-flex-direction-column is-row-gap-3 ml-5'>
+                {{#each experiences}}
+                  <div>
+                    <div>
+                      <h3 class='title is-6 has-text-weight-semibold mb-0'>
+                        {{this.position}}
+                      </h3>
+                      {{#if this.company}}
+                        <h4 class='subtitle is-6 mt-1'>
+                          {{this.company}}
+                        </h4>
+                      {{/if}}
+                    </div>
+
+                    {{#if this.responsibilities}}
+                      <p
+                        class='has-text-justified mt-2'
+                      >{{this.responsibilities}}</p>
+                    {{/if}}
+
+                    <div class='is-size-7 mt-2'>
+                      {{this.fromDate}}
+                      —
+                      {{this.toDate}}
+                    </div>
+                  </div>
+                {{/each}}
+              </div>
+            </section>
+          {{/if}}
 
           {{#if educations}}
             <section
-              class='mt-6 animate__animated animate__fadeInRight animate__delay-500ms'
+              class='mt-5 animate__animated animate__fadeInRight animate__delay-750ms'
             >
-              <div class='mb-5'>
-                <h2 class='title is-5 has-text-weight-bold mb-1'>Education</h2>
-                <h3 class='subtitle is-6 is-italic' lang='pt-br'>Formação</h3>
+              <div class='is-flex is-align-items-center mb-4'>
+                <h2 class='title is-5 has-text-weight-bold mb-1'>Educations</h2>
+                &nbsp;
+                <h3
+                  class='subtitle is-6 is-italic'
+                  lang='pt-br'
+                >(Formações)</h3>
               </div>
-              <div class='is-flex is-flex-direction-column is-row-gap-4 ml-5'>
+              <div class='is-flex is-flex-direction-column is-row-gap-3 ml-5'>
                 {{#each educations}}
                   <div>
                     <div>
@@ -99,7 +127,7 @@
                         {{this.course}}
                       </h3>
                       {{#if this.institution}}
-                        <h4 class='subtitle is-6 is-italic mt-1'>
+                        <h4 class='subtitle is-6 mt-1'>
                           {{this.institution}}
                         </h4>
                       {{/if}}
@@ -110,49 +138,6 @@
                       {{this.toDate}}
                     </div>
                     {{! ~ !}}
-                  </div>
-                {{/each}}
-              </div>
-            </section>
-          {{/if}}
-
-          {{#if experiences}}
-            <section
-              class='mt-6 animate__animated animate__fadeInRight animate__delay-750ms'
-            >
-              <div class='mb-5'>
-                <h2 class='title is-5 has-text-weight-bold mb-1'>
-                  Experiences
-                </h2>
-                <h3 class='subtitle is-6 is-italic' lang='pt-br'>
-                  Experiências
-                </h3>
-              </div>
-              <div class='is-flex is-flex-direction-column is-row-gap-4 ml-5'>
-                {{#each experiences}}
-                  <div>
-                    <div>
-                      <h3 class='title is-6 has-text-weight-semibold mb-0'>
-                        {{this.position}}
-                      </h3>
-                      {{#if this.company}}
-                        <h4 class='subtitle is-6 is-italic mt-1'>
-                          {{this.company}}
-                        </h4>
-                      {{/if}}
-                    </div>
-
-                    {{#if this.responsibilities}}
-                      <p class='has-text-justified mt-2'>
-                        {{this.responsibilities}}
-                      </p>
-                    {{/if}}
-
-                    <div class='is-size-7 mt-2'>
-                      {{this.fromDate}}
-                      —
-                      {{this.toDate}}
-                    </div>
                   </div>
                 {{/each}}
               </div>
@@ -169,8 +154,7 @@
             <button class='button'>
               <div>
                 <span>Actions</span>
-                &bull;
-                <span class='is-size-7 is-italic' lang='pt-br'>Ações</span>
+                <span class='is-size-7 is-italic' lang='pt-br'>(Ações)</span>
               </div>
               <span class='icon is-small'>
                 <i class='fas fa-angle-up'></i>
@@ -182,8 +166,7 @@
               <a class='dropdown-item is-unselectable' onclick='toggleTheme()'>
                 <i class='fas fa-palette mr-2'></i>
                 <span>Toggle theme</span>
-                &bull;
-                <span class='is-size-7 is-italic' lang='pt-br'>Alternar tema</span>
+                <span class='is-size-7 is-italic' lang='pt-br'>(Alternar tema)</span>
               </a>
 
               <hr class='dropdown-divider' />
@@ -194,13 +177,10 @@
               >
                 <i class='fas fa-download mr-2'></i>
                 <span>
-                  Save as
-                  <span class='is-uppercase'>PDF</span>
+                  Save as PDF
                 </span>
-                &bull;
                 <span class='is-size-7 is-italic' lang='pt-br'>
-                  Salvar como
-                  <span class='is-uppercase'>PDF</span>
+                  (Salvar como PDF)
                 </span>
               </a>
             </div>

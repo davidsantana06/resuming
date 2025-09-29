@@ -13,19 +13,14 @@ body {
   width: 100%;
 }
 
-.image.is-12x12 {
-  width: 12px;
-  height: 12px;
+p {
+  white-space: pre-line;
+  text-indent: 0;
 }
 
-.image.is-max-width-128 {
+.image.is-max-width-192 {
   width: 100%;
-  max-width: 128px;
-}
-
-.image.is-max-width-256 {
-  width: 100%;
-  max-width: 256px;
+  max-width: 192px;
 }
 
 .is-borderless {
@@ -38,10 +33,6 @@ body {
 
 .is-right-0 {
   right: 0;
-}
-
-.is-size-8 {
-  font-size: 0.6rem;
 }
 
 .is-z-index-1 {
