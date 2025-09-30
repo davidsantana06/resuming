@@ -13,14 +13,12 @@ body {
   width: 100%;
 }
 
-p {
-  white-space: pre-line;
-  text-indent: 0;
+.hero.is-fullheight {
+  min-height: 100svh;
 }
 
-.image.is-max-width-256 {
-  width: 100%;
-  max-width: 256px;
+.hero.is-fullheight-with-navbar {
+  min-height: calc(100svh - var(--bulma-navbar-height));
 }
 
 .is-borderless {
@@ -37,6 +35,10 @@ p {
 
 .is-z-index-1 {
   z-index: 1;
+}
+
+.has-white-space-pre-line {
+  white-space: pre-line;
 }
 
 .animate__delay-250ms {

@@ -1,11 +1,9 @@
-const documentElement = document.documentElement;
+const { documentElement } = document;
 
 const toggleTheme = () => {
   const currentTheme = documentElement.dataset.theme;
   const contrastTheme = currentTheme === 'dark' ? 'light' : 'dark';
-
   documentElement.dataset.theme = contrastTheme;
-
   localStorage.setItem('theme', contrastTheme);
 };
 

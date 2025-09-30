@@ -3,6 +3,7 @@ import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
 import ViewService from './view/view.service';
 import ProfileService from './profile/profile.service';
+import { RELEASES_URL, SOURCE_CODE_URL } from './environments';
 
 @ApiTags('app')
 @ApiResponse({ status: 404, description: 'Profile not found' })
@@ -14,8 +15,43 @@ export default class AppController {
   ) {}
 
   @ApiOperation({
+    summary: 'Render index',
+    description: 'Renders the index view',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Success',
+    content: {
+      'text/html': {
+        schema: {
+          type: 'string',
+          example: '<html data-theme="dark" lang="en">...</html>',
+        },
+      },
+    },
+  })
+  @Render('index')
+  @Get('/')
+  renderIndex() {
+    return {
+      navbarItems: [
+        {
+          icon: 'fab fa-github',
+          label: 'Source Code',
+          url: SOURCE_CODE_URL,
+        },
+        {
+          icon: 'fas fa-tag',
+          label: 'Releases',
+          url: RELEASES_URL,
+        },
+      ],
+    };
+  }
+
+  @ApiOperation({
     summary: 'Render a resume',
-    description: 'Renders the resume for the given profile handle',
+    description: 'Renders the resume view for the given profile handle',
   })
   @ApiParam({
     name: 'profileHandle',
@@ -29,7 +65,7 @@ export default class AppController {
       'text/html': {
         schema: {
           type: 'string',
-          example: '<html lang="en" data-theme="dark">...</html>',
+          example: '<html data-theme="dark">...</html>',
         },
       },
     },

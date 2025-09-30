@@ -1,0 +1,86 @@
+<html data-theme='dark' lang='en'>
+  <head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+
+    <title>Resuming</title>
+    <link rel='icon' href='/static/favicon.ico' />
+
+    <link rel='stylesheet' href='/static/vendor/bulma.min.css' />
+    <link rel='stylesheet' href='/static/vendor/animate.min.css' />
+    <link rel='stylesheet' href='/static/css/style.css' />
+    <script defer src='/static/vendor/fontawesome.min.js'></script>
+  </head>
+
+  <body class='has-navbar-fixed-top'>
+    <nav class='navbar is-fixed-top has-shadow'>
+      <div class='navbar-brand'>
+        <a class='navbar-burger' data-target='.navbar-menu'>
+          <span aria-hidden='true'></span>
+          <span aria-hidden='true'></span>
+          <span aria-hidden='true'></span>
+          <span aria-hidden='true'></span>
+        </a>
+      </div>
+      <div class='navbar-menu'>
+        <div class='navbar-end'>
+          {{#each navbarItems}}
+            <a class='navbar-item' href='{{this.url}}' target='_blank'>
+              <div
+                class='is-flex is-align-items-center is-justify-content-center'
+              >
+                <i class='{{this.icon}} mr-3'></i>
+                <b class='has-text-weight-medium'>{{this.label}}</b>
+              </div>
+            </a>
+          {{/each}}
+        </div>
+      </div>
+    </nav>
+
+    <section class='hero is-fullheight-with-navbar'>
+      <div
+        class='hero-body is-flex is-flex-direction-column is-align-items-center is-justify-content-center'
+      >
+        <div class='is-flex is-justify-content-center mb-5'>
+          <figure class='image'>
+            <img src='/static/img/_logo.png' style='width: 100px' />
+          </figure>
+        </div>
+
+        <div class='has-text-centered mb-5'>
+          <h1
+            class='title is-3 mb-2 animate__animated animate__fadeInDown animate__delay-250ms'
+          >
+            Resuming
+          </h1>
+          <h2
+            class='subtitle is-6 mb-5 animate__animated animate__fadeInDown animate__delay-500ms'
+          >
+            The résumé platform built by developers, for developers
+          </h2>
+        </div>
+
+        <div class='has-text-centered'>
+          <a
+            class='button is-primary is-medium is-radiusless px-6 py-4 mb-2 animate__animated animate__bounceIn animate__delay-750ms'
+            href='/swagger/ui'
+          >
+            <span class='icon'>
+              <i class='fas fa-rocket'></i>
+            </span>
+            <span class='is-uppercase'>Get Started</span>
+          </a>
+
+          <p
+            class='is-size-7 animate__animated animate__fadeInUp animate__delay-1s'
+          >
+            By clicking, you will be redirected to Swagger UI
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <script src='/static/js/index.js'></script>
+  </body>
+</html>
