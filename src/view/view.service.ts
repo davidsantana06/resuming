@@ -46,6 +46,6 @@ export default class ViewService implements OnModuleInit, OnModuleDestroy {
   }
 
   private mountPath(template: string): string {
-    return `view/${template}.hbs`;
+    return `views/${template}.hbs`;
   }
 }

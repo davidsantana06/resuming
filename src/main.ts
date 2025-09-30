@@ -9,7 +9,7 @@ import HttpExceptionFilter from './http-exception.filter';
 
 const setupViewEngine = (app: NestExpressApplication) => {
   app.setViewEngine('hbs');
-  app.setBaseViewsDir('view');
+  app.setBaseViewsDir('views');
 };
 
 const setupStaticAssets = (app: NestExpressApplication) => {
