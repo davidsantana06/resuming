@@ -18,9 +18,9 @@ p {
   text-indent: 0;
 }
 
-.image.is-max-width-192 {
+.image.is-max-width-256 {
   width: 100%;
-  max-width: 192px;
+  max-width: 256px;
 }
 
 .is-borderless {
