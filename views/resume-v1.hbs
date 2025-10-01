@@ -1,6 +1,6 @@
 {{! resume v1 (regular) !}}
 
-<html lang='en' data-theme='dark'>
+<html data-theme='dark'>
   <head>
     <meta charset='UTF-8' />
     <meta name='viewport' content='width=device-width, initial-scale=1.0' />
@@ -12,13 +12,13 @@
     <link rel='stylesheet' href='/static/vendor/bulma-tooltip.min.css' />
     <link rel='stylesheet' href='/static/vendor/animate.min.css' />
     <link rel='stylesheet' href='/static/css/style.css' />
-    <script src='/static/vendor/fontawesome.min.js'></script>
+    <script defer src='/static/vendor/fontawesome.min.js'></script>
   </head>
 
   <body>
     <main class='container px-5 my-6'>
       <div class='columns'>
-        <div class='column is-full is-3'>
+        <div class='column is-3'>
           <section
             class='is-flex is-flex-direction-column is-align-items-center'
           >
@@ -52,7 +52,7 @@
           </section>
         </div>
 
-        <div class='column is-full is-9'>
+        <div class='column is-9'>
           <section
             class='animate__animated animate__fadeInRight animate__delay-250ms'
           >
@@ -61,7 +61,9 @@
               <h2 class='subtitle is-6'>{{title}}</h2>
             </div>
 
-            <p class='has-text-justified mb-3'>{{summary}}</p>
+            <p
+              class='has-text-justified has-white-space-pre-line mb-3'
+            >{{summary}}</p>
           </section>
 
           {{#if experiences}}
@@ -69,31 +71,31 @@
               class='mt-5 animate__animated animate__fadeInRight animate__delay-500ms'
             >
               <div class='is-flex is-align-items-center mb-4'>
-                <h2 class='title is-5 has-text-weight-bold mb-1'>
+                <h3 class='title is-5 has-text-weight-bold mb-1' lang='en'>
                   Experiences
-                </h2>
-                &nbsp;
-                <h3 class='subtitle is-6 is-italic' lang='pt-br'>
-                  (Experiências)
                 </h3>
+                &nbsp;
+                <span class='is-size-6 is-italic' lang='pt-br'>
+                  (Experiências)
+                </span>
               </div>
               <div class='is-flex is-flex-direction-column is-row-gap-3 ml-5'>
                 {{#each experiences}}
                   <div>
                     <div>
-                      <h3 class='title is-6 has-text-weight-semibold mb-0'>
+                      <h4 class='title is-6 has-text-weight-semibold mb-0'>
                         {{this.position}}
-                      </h3>
+                      </h4>
                       {{#if this.company}}
-                        <h4 class='subtitle is-6 mt-1'>
+                        <h5 class='subtitle is-6 mt-1'>
                           {{this.company}}
-                        </h4>
+                        </h5>
                       {{/if}}
                     </div>
 
                     {{#if this.responsibilities}}
                       <p
-                        class='has-text-justified mt-2'
+                        class='has-text-justified has-white-space-pre-line mt-2'
                       >{{this.responsibilities}}</p>
                     {{/if}}
 
@@ -113,24 +115,25 @@
               class='mt-5 animate__animated animate__fadeInRight animate__delay-750ms'
             >
               <div class='is-flex is-align-items-center mb-4'>
-                <h2 class='title is-5 has-text-weight-bold mb-1'>Educations</h2>
+                <h3 class='title is-5 has-text-weight-bold mb-1' lang='en'>
+                  Educations
+                </h3>
                 &nbsp;
-                <h3
-                  class='subtitle is-6 is-italic'
-                  lang='pt-br'
-                >(Formações)</h3>
+                <span class='is-size-6 is-italic' lang='pt-br'>
+                  (Formações)
+                </span>
               </div>
               <div class='is-flex is-flex-direction-column is-row-gap-3 ml-5'>
                 {{#each educations}}
                   <div>
                     <div>
-                      <h3 class='title is-6 has-text-weight-semibold mb-0'>
+                      <h4 class='title is-6 has-text-weight-semibold mb-0'>
                         {{this.course}}
-                      </h3>
+                      </h4>
                       {{#if this.institution}}
-                        <h4 class='subtitle is-6 mt-1'>
+                        <h5 class='subtitle is-6 mt-1'>
                           {{this.institution}}
-                        </h4>
+                        </h5>
                       {{/if}}
                     </div>
                     <div class='is-size-7 mt-2'>
@@ -138,7 +141,6 @@
                       —
                       {{this.toDate}}
                     </div>
-                    {{! ~ !}}
                   </div>
                 {{/each}}
               </div>
@@ -154,7 +156,7 @@
           <div class='dropdown-trigger'>
             <button class='button'>
               <div>
-                <span>Actions</span>
+                <span lang='en'>Actions</span>
                 <span class='is-size-7 is-italic' lang='pt-br'>(Ações)</span>
               </div>
               <span class='icon is-small'>
@@ -166,7 +168,7 @@
             <div class='dropdown-content'>
               <a class='dropdown-item is-unselectable' onclick='toggleTheme()'>
                 <i class='fas fa-palette mr-2'></i>
-                <span>Toggle theme</span>
+                <span lang='en'>Toggle theme</span>
                 <span class='is-size-7 is-italic' lang='pt-br'>(Alternar tema)</span>
               </a>
 
@@ -178,10 +180,10 @@
               >
                 <i class='fas fa-download mr-2'></i>
                 <span>
-                  Save as PDF
+                  <span lang='en'>Save as PDF</span>
                 </span>
                 <span class='is-size-7 is-italic' lang='pt-br'>
-                  (Salvar como PDF)
+                  <span lang='pt-br'>(Salvar como PDF)</span>
                 </span>
               </a>
             </div>
@@ -190,6 +192,6 @@
       </div>
     </main>
 
-    <script src='/static/js/script.js'></script>
+    <script src='/static/js/resume-v1.js'></script>
   </body>
 </html>

@@ -19,18 +19,18 @@ export default class ViewService implements OnModuleInit, OnModuleDestroy {
     await this.browser.close();
   }
 
-  async render(template: string, data: object): Promise<string> {
-    const path = this.mountPath(template);
-    const content = await fs.readFile(path, 'utf8');
-    const compiled = handlebars.compile(content);
-    return compiled({
+  async render(view: string, context: object): Promise<string> {
+    const filepath = this.mountFilepath(view);
+    const content = await fs.readFile(filepath, 'utf8');
+    const compiler = handlebars.compile(content);
+    return compiler({
       baseUrl: `http://localhost:${PORT}`,
-      ...data,
+      ...context,
     });
   }
 
-  async export(template: string, data: object): Promise<Buffer> {
-    const html = await this.render(template, data);
+  async export(view: string, context: object): Promise<Buffer> {
+    const html = await this.render(view, context);
 
     const page = await this.browser.newPage();
     await page.setContent(html, { waitUntil: 'networkidle0' });
@@ -45,7 +45,7 @@ export default class ViewService implements OnModuleInit, OnModuleDestroy {
     return Buffer.from(pdfBytes);
   }
 
-  private mountPath(template: string): string {
-    return `views/${template}.hbs`;
+  private mountFilepath(view: string): string {
+    return `views/${view}.hbs`;
   }
 }
