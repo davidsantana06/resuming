@@ -1,6 +1,7 @@
 #!/bin/bash
 
 npm install
+npx puppeteer browsers install chrome
 
 case "$1" in
   dev)
@@ -9,6 +10,7 @@ case "$1" in
     ;;
   prod)
     npx prisma migrate deploy
+    npm run build
     npm run start:prod
     ;;
   *)

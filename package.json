@@ -1,7 +1,7 @@
 {
   "name": "resuming",
   "version": "",
-  "description": "Platform focused on managing and sharing resumes",
+  "description": "The résumé platform built by developers, for developers",
   "author": "davidsantana06",
   "private": true,
   "license": "MIT",
@@ -20,6 +20,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
+    "@nestjs/cli": "^11.0.10",
     "@nestjs/common": "^11.1.6",
     "@nestjs/core": "^11.1.6",
     "@nestjs/jwt": "^11.0.0",
@@ -50,7 +51,6 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
     "@eslint/js": "^9.34.0",
-    "@nestjs/cli": "^11.0.10",
     "@nestjs/schematics": "^11.0.7",
     "@nestjs/testing": "^11.1.6",
     "@swc/cli": "^0.7.8",

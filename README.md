@@ -7,7 +7,7 @@
 <img
   src="./static/img/_usage.gif"
   alt="Resuming — Usage"
-  style="width: 100%"
+  style="width: 100%;"
 />
 
 **Resuming** is a web platform for creating and sharing résumés, built _by developers, for developers_. Users can manage up to three profiles with personalized URLs, including basic information, education, and work experience.
@@ -32,13 +32,15 @@ For native execution, a **Linux/Unix** machine with **Node.js 22** is required. 
 - `DATABASE_URL` — Database connection string.
 - `JWT_SECRET` — Secret key for signing JWTs.
 - `PORT` — Server port.
+- `SOURCE_CODE_URL` — URL of the source code repository.
+- `RELEASES_URL` — URL of the releases.
 
 The commands below assume execution from the project root.
 
 Make the script executable:
 
 ```bash
-chmod +x ./run.sh
+chmod +x run.sh
 ```
 
 Run the application in development or production mode:
