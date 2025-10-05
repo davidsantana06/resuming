@@ -54,7 +54,7 @@ export default class ProfileService {
   }
 
   async uploadPicture(userId: string, file: Express.Multer.File) {
-    const { picture } = await this.getUnique({ userId });
+    const { id, picture } = await this.getUnique({ userId });
 
     const canDeleteCurrentPicture =
       picture !== null && picture !== this.pictureService.DEFAULT_FILENAME;
@@ -62,7 +62,7 @@ export default class ProfileService {
 
     const { filename } = await this.pictureService.save(file);
 
-    return this.profileRepository.updatePicture(userId, { picture: filename });
+    return this.profileRepository.updatePicture(id, { picture: filename });
   }
 
   composeContacts(profile: CompleteProfile): ProfileContact[] {
