@@ -50,8 +50,8 @@ export default class AppController {
   }
 
   @ApiOperation({
-    summary: 'Render a resume',
-    description: 'Renders the resume view for the given profile handle',
+    summary: 'Render a résumé',
+    description: 'Renders the résumé view for the given profile handle',
   })
   @ApiParam({
     name: 'profileHandle',
@@ -80,8 +80,8 @@ export default class AppController {
   }
 
   @ApiOperation({
-    summary: 'Export a resume',
-    description: 'Exports the resume for the given profile handle as PDF',
+    summary: 'Export a résumé',
+    description: 'Exports the résumé for the given profile handle as PDF',
   })
   @ApiParam({
     name: 'profileHandle',

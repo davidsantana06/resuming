@@ -33,7 +33,8 @@ const setupValidationPipe = (app: NestExpressApplication) => {
 const setupSwagger = (app: NestExpressApplication) => {
   const config = new DocumentBuilder()
     .setTitle('Resuming')
-    .setDescription('Platform dedicated to managing and sharing resumes')
+    .setVersion('0.1.0')
+    .setDescription('The résumé platform built by developers, for developers')
     .addTag('app')
     .addTag('auth')
     .addTag('profile')
