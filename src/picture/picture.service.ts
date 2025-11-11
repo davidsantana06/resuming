@@ -7,7 +7,7 @@ import MissingFileException from './exception/missing-file.exception';
 
 @Injectable()
 export default class PictureService {
-  readonly DEFAULT_FILENAME = '_picture.png';
+  private readonly DEFAULT_FILENAME = '_picture.png';
   private readonly MAX_FILE_SIZE = 256 * 1024; /* ~ 256 KB */
   private readonly VALID_FILE_EXTENSIONS = ['.jpg', '.jpeg', '.png'];
 
@@ -28,7 +28,9 @@ export default class PictureService {
     return { filename };
   }
 
-  async delete(filename: string): Promise<void> {
+  async delete(filename: string | null): Promise<void> {
+    const canDelete = filename !== null && filename !== this.DEFAULT_FILENAME;
+    if (!canDelete) return;
     const path = this.mountPath(filename);
     await fs.unlink(path);
   }

@@ -28,8 +28,12 @@ export default class ProfileService {
     return this.profileRepository.create(userId, dto);
   }
 
+  async findUnique(where: Prisma.ProfileWhereUniqueInput) {
+    return this.profileRepository.findUnique(where);
+  }
+
   async getUnique(where: Prisma.ProfileWhereUniqueInput) {
-    const profile = await this.profileRepository.findUnique(where);
+    const profile = await this.findUnique(where);
     if (profile == null) throw new ProfileNotFoundException();
     return profile;
   }
@@ -49,19 +53,14 @@ export default class ProfileService {
 
   async delete(userId: string) {
     const { id, picture } = await this.getUnique({ userId });
-    if (picture !== null) await this.pictureService.delete(picture);
+    await this.pictureService.delete(picture);
     return this.profileRepository.delete(id);
   }
 
   async uploadPicture(userId: string, file: Express.Multer.File) {
     const { id, picture } = await this.getUnique({ userId });
-
-    const canDeleteCurrentPicture =
-      picture !== null && picture !== this.pictureService.DEFAULT_FILENAME;
-    if (canDeleteCurrentPicture) await this.pictureService.delete(picture);
-
+    await this.pictureService.delete(picture);
     const { filename } = await this.pictureService.save(file);
-
     return this.profileRepository.updatePicture(id, { picture: filename });
   }
 
